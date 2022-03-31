@@ -49,6 +49,22 @@ class Produto extends Conexao{
 		$stmt->execute();
 	}
 
+
+	public static function getMaisVendidos(){
+		$query = "SELECT * FROM products ORDER BY sales DESC LIMIT 4";
+		$stmt = self::setConn()->prepare($query);
+		$stmt->execute();
+
+		return $dados = $stmt->fetchAll(\PDO::FETCH_OBJ);
+	}
+
+	public static function getMaisRecentes(){
+		$query = "SELECT * FROM products ORDER BY date_create DESC LIMIT 4";
+		$stmt = self::setConn()->prepare($query);
+		$stmt->execute();
+
+		return $dados = $stmt->fetchAll(\PDO::FETCH_OBJ);
+	}
 	
 
 

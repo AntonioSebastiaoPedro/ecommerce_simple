@@ -1,6 +1,7 @@
 <?php
 namespace App\Controllers;
 use App\Models\Category;
+use App\Models\Produto;
 
 use \Jenssegers\Blade\Blade;
 
@@ -13,7 +14,9 @@ class HomeController{
 
 	#index
 	public function index(){
-		//dd(Category::getNameCategory(1)[0]->name_category);
-		echo($this->blade->render('user/index'));
+
+		$vendidos = Produto::getMaisVendidos();
+		$recentes = Produto::getMaisRecentes();
+		return $this->blade->render('user/index', compact('vendidos', 'recentes'));
 	}
 }

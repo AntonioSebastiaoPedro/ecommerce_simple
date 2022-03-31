@@ -16,13 +16,15 @@
     <section id="producto1" class="section-p1">
         <h2>Mais vendidos</h2>
         <p>Os produtos em alta</p>
-        <!--produto 1 -->
+        <!--produto -->
         <div class="pro-container">
-            <div class="pro">
-                <img src="img/products/tel-3-apple.png" alt="">
+        @foreach($vendidos as $produto)
+            <a href="{{ DIRPAGE.'produto/'.$produto->id }}">
+            <div class="pro" >
+                <img src="{{ DIRIMG.'img/products/'.App\Models\Category::getNameCategory($produto->id_category)[0]->name_category.'/'.$produto->name_product.'/'.$produto->img}}" alt="">
                 <div class="des">
-                    <span>APPLE</span>
-                    <h5>Cartoon Astronaut T-Shirts</h5>
+                    <span> {{App\Models\Category::getNameCategory($produto->id_category)[0]->name_category}} </span>
+                    <h5>{{$produto->name_product}}</h5>
                     <div class="star">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
@@ -30,69 +32,14 @@
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
-                    <h4>$78</h4>
-
+                    <h4>{{$produto->price_unit}}</h4>
                 </div>
                 <a href="#"><i class="fal fa-shopping-cart cart"></i></a>
             </div>
-            <!--produto 1 fim -->
-
-            <!--produto 2 -->
-            <div class="pro">
-                <img src="img/products/tel-3-samsung.png" alt="">
-                <div class="des">
-                    <span>SAMSUNG</span>
-                    <h5>Cartoon Astronaut T-Shirts</h5>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>$78</h4>
-                </div>
-                <a href="#"><i class="fal fa-shopping-cart cart"></i></a>
-            </div>
-            <!--produto 2 fim -->
-
-            <!--produto 3 -->
-            <div class="pro">
-                <img src="img/products/acessorio-2.png" alt="">
-                <div class="des">
-                    <span>ACESSORIO</span>
-                    <h5>Suport Phone</h5>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>23.559 Kz</h4>
-                </div>
-                <a href="#"><i class="fal fa-shopping-cart cart"></i></a>
-            </div>
-            <!--produto 3 fim-->
-
-            <!--produto 4 -->
-            <div class="pro">
-                <img src="img/products/acessorio-4.png" alt="">
-                <div class="des">
-                    <span>ACESSORIO</span>
-                    <h5>Head Phones</h5>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>27.000 Kz</h4>
-                </div>
-                <a href="#"><i class="fal fa-shopping-cart cart"></i></a>
-            </div>
-            <!--produto 4 fim -->
+            </a>
+        @endforeach            
+        </div>
+    <!--produto-->
             
     </section>
     <!--produtos mais vendidos-->
@@ -100,22 +47,24 @@
     <!--banner informativo 1 toda tela-->
     <section id="banner" class="section-m1">
         <h4>Produtos incriveis </h4>
-        <h2>atualizações <span>Sempre</span> – sobre todos os produtos</h2>
+        <h2>Atualizações <span>Sempre</span> – Sobre Todos os Produtos</h2>
         <button class="normal">Explore Mais</button>
     </section>
     <!--Banner iformativo 1 toda tela fim-->
 
-    <!--produtos mais vendidos-->
+    <!--produtos mais recentes-->
     <section id="producto1" class="section-p1">
         <h2>Novos produtos</h2>
         <p>Colecção de novos produtos</p>
-        <!--produto 1 -->
+        <!--produto -->
         <div class="pro-container">
-            <div class="pro">
-                <img src="@php echo DIRIMG.'img/products/tel-1-apple.png' @endphp" alt="">
+        @foreach($recentes as $produto)
+            <a href="{{ DIRPAGE.'produto/'.$produto->id }}">
+            <div class="pro" >
+                <img src="{{ DIRIMG.'img/products/'.App\Models\Category::getNameCategory($produto->id_category)[0]->name_category.'/'.$produto->name_product.'/'.$produto->img}}" alt="">
                 <div class="des">
-                    <span>APPLE</span>
-                    <h5>Iphone 13</h5>
+                    <span> {{App\Models\Category::getNameCategory($produto->id_category)[0]->name_category}} </span>
+                    <h5>{{$produto->name_product}}</h5>
                     <div class="star">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
@@ -123,71 +72,16 @@
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
-                    <h4>$78</h4>
+                    <h4>{{$produto->price_unit}}</h4>
                 </div>
                 <a href="#"><i class="fal fa-shopping-cart cart"></i></a>
             </div>
-            <!--produto 1 fim -->
-
-            <!--produto 2 -->
-            <div class="pro">
-                <img src="@php echo DIRIMG.'img/products/tel-1-samsung.png' @endphp" alt="">
-                <div class="des">
-                    <span>SAMSUNG</span>
-                    <h5>Samsung</h5>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>$78</h4>
-                </div>
-                <a href="#"><i class="fal fa-shopping-cart cart"></i></a>
-            </div>
-            <!--produto 2 fim -->
-
-            <!--produto 3 -->
-            <div class="pro">
-                <img src="@php echo DIRIMG.'img/products/tel-2-samsung.png' @endphp" alt="">
-                <div class="des">
-                    <span>SAMSUNG</span>
-                    <h5>Samsung</h5>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>$78</h4>
-                </div>
-                <a href="#"><i class="fal fa-shopping-cart cart"></i></a>
-            </div>
-            <!--produto 3 fim -->
-
-            <!--produto 4 -->
-            <div class="pro">
-                <img src="@php echo DIRIMG.'img/products/acessorio-1.png' @endphp" alt="">
-                <div class="des">
-                    <span>ACESSORIO</span>
-                    <h5>SmartWatch</h5>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>$78</h4>
-                </div>
-                <a href="#"><i class="fal fa-shopping-cart cart"></i></a>
-            </div>
-            <!--produto 4 fim -->
-            
+            </a>
+        @endforeach            
+        </div>
+            <!--produto fim -->    
     </section>
-    <!--produtos mais vendidos fim -->
+    <!--produtos mais recentes fim -->
 
 
     <!--banner 2 e 3-->
