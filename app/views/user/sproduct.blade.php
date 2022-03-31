@@ -5,22 +5,19 @@
     <section id="prodetails" class="section-p1">
     @foreach($dados as $produto)
         <div class="single-pro-image">
-            <img src="img/products/produto-unico-1.png" width="100%" id="MainImg" alt="">
+            <img src="{{ DIRIMG.'img/products/'.App\Models\Category::getNameCategory($produto->id_category)[0]->name_category.'/'.$produto->name_product.'/'.$produto->img}}" width="100%" id="MainImg" alt="">
 
-            <div class="small-img-group">
-                <div class="small-img-col">
-                    <img src="img/products/produto-unico-1.png" width="100%" class="small-img" alt="">
+                <div class="small-img-group">
+            @if(!empty($outras_fotos))
+                @foreach($outras_fotos as $img)
+                    <div class="small-img-col">
+                        <img src="{{DIRIMG.'img/products/'.App\Models\Category::getNameCategory($produto->id_category)[0]->name_category.'/'.$produto->name_product.'/'.$img->img}}" width="100%" class="small-img" alt="">
+                    </div>
+                @endforeach
                 </div>
-                <div class="small-img-col">
-                    <img src="img/products/produto-unico-2.png" width="100%" class="small-img" alt="">
-                </div>
-                <div class="small-img-col">
-                    <img src="img/products/produto-unico-3.png" width="100%" class="small-img" alt="">
-                </div>
-                <div class="small-img-col">
-                    <img src="img/products/produto-unico-4.png" width="100%" class="small-img" alt="">
-                </div>
-            </div>
+            @else
+
+            @endif
         </div>
 
         <div class="single-pro-details">
@@ -40,7 +37,7 @@
         <h2>Mais vendidos </h2>
         <p>Produtos em alta</p>
         <div class="pro-container">
-        @foreach($dados as $produto)
+        @foreach($vendidos as $produto)
             <a href="{{ DIRPAGE.'produto/'.$produto->id }}">
             <div class="pro" >
                 <img src="{{ DIRIMG.'img/products/'.App\Models\Category::getNameCategory($produto->id_category)[0]->name_category.'/'.$produto->name_product.'/'.$produto->img}}" alt="">
@@ -82,9 +79,3 @@
             MainImg.src = smallimg[3].src;
         }
     </script>
-
-
-    <script src="script.js"></script>
-</body>
-
-</html>

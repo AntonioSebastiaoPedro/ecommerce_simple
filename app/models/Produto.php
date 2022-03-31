@@ -65,6 +65,15 @@ class Produto extends Conexao{
 
 		return $dados = $stmt->fetchAll(\PDO::FETCH_OBJ);
 	}
+
+	public static function getOutrasFotos($idProduto){
+		$query = "SELECT others_imgs.img FROM others_imgs INNER JOIN products ON others_imgs.idProduct = products.id WHERE products.id = ?";
+		$stmt = self::setConn()->prepare($query);
+		$stmt->bindValue(1, $idProduto);
+		$stmt->execute();
+
+		return $dados = $stmt->fetchAll(\PDO::FETCH_OBJ);
+	}
 	
 
 

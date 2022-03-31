@@ -5,7 +5,7 @@ use App\Controllers\RoutesController as Rota;
 use \Jenssegers\Blade\Blade;
 use \App\Models\Produto;
 
-class ShopController extends Produto{
+class ProdutoController extends Produto{
 	private $blade;
 	public $erros = [];
 
@@ -31,8 +31,10 @@ class ShopController extends Produto{
 		if($id == null) {
 			$this->index();
 		}else{
+			$outras_fotos = self::getOutrasFotos($id);
+			$vendidos = self::getMaisVendidos();
 			$dados = $this->getProduto($id);
-			return $this->blade->render('user/sproduct', compact('dados'));
+			return $this->blade->render('user/sproduct', compact('dados', 'vendidos', 'outras_fotos'));
 		}
 
 	}
