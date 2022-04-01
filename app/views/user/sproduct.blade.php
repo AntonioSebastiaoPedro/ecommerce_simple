@@ -62,6 +62,7 @@
 
 
 @endsection
+@section('js')
     <script>
         var MainImg = document.getElementById("MainImg");
         var smallimg = document.getElementsByClassName("small-img");
@@ -78,4 +79,8 @@
         smallimg[3].onclick = function() {
             MainImg.src = smallimg[3].src;
         }
+        smallimg[4].onclick = function() {
+            MainImg.src = smallimg[4].src;
+        }
     </script>
+@endsection

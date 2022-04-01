@@ -94,7 +94,7 @@
         </div>
     </footer>
 
-
+    @yield('js')
     <script src="@php echo DIRJS.'script.js' @endphp"></script>
 </body>
 
