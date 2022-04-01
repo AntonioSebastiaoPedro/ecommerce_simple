@@ -6,7 +6,6 @@
     @foreach($dados as $produto)
         <div class="single-pro-image">
             <img src="{{ DIRIMG.'img/products/'.App\Models\Category::getNameCategory($produto->id_category)[0]->name_category.'/'.$produto->name_product.'/'.$produto->img}}" width="100%" id="MainImg" alt="">
-
                 <div class="small-img-group">
             @if(!empty($outras_fotos))
                 @foreach($outras_fotos as $img)
@@ -38,8 +37,8 @@
         <p>Produtos em alta</p>
         <div class="pro-container">
         @foreach($vendidos as $produto)
-            <a href="{{ DIRPAGE.'produto/'.$produto->id }}">
             <div class="pro" >
+            <a href="{{ DIRPAGE.'produto/'.$produto->id }}">
                 <img src="{{ DIRIMG.'img/products/'.App\Models\Category::getNameCategory($produto->id_category)[0]->name_category.'/'.$produto->name_product.'/'.$produto->img}}" alt="">
                 <div class="des">
                     <span> {{App\Models\Category::getNameCategory($produto->id_category)[0]->name_category}} </span>
@@ -54,8 +53,8 @@
                     <h4>{{$produto->price_unit}}</h4>
                 </div>
                 <a href="#"><i class="fal fa-shopping-cart cart"></i></a>
-            </div>
             </a>
+            </div>
         @endforeach            
         </div>
     </section>

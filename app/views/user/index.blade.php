@@ -19,8 +19,8 @@
         <!--produto -->
         <div class="pro-container">
         @foreach($vendidos as $produto)
-            <a href="{{ DIRPAGE.'produto/'.$produto->id }}">
             <div class="pro" >
+            <a href="{{ DIRPAGE.'produto/'.$produto->id }}">
                 <img src="{{ DIRIMG.'img/products/'.App\Models\Category::getNameCategory($produto->id_category)[0]->name_category.'/'.$produto->name_product.'/'.$produto->img}}" alt="">
                 <div class="des">
                     <span> {{App\Models\Category::getNameCategory($produto->id_category)[0]->name_category}} </span>
@@ -35,8 +35,8 @@
                     <h4>{{$produto->price_unit}}</h4>
                 </div>
                 <a href="#"><i class="fal fa-shopping-cart cart"></i></a>
-            </div>
             </a>
+            </div>
         @endforeach            
         </div>
     <!--produto-->
@@ -56,27 +56,21 @@
     <section id="producto1" class="section-p1">
         <h2>Novos produtos</h2>
         <p>Colecção de novos produtos</p>
+
         <!--produto -->
         <div class="pro-container">
         @foreach($recentes as $produto)
-            <a href="{{ DIRPAGE.'produto/'.$produto->id }}">
             <div class="pro" >
+            <a href="{{ DIRPAGE.'produto/'.$produto->id }}">
                 <img src="{{ DIRIMG.'img/products/'.App\Models\Category::getNameCategory($produto->id_category)[0]->name_category.'/'.$produto->name_product.'/'.$produto->img}}" alt="">
                 <div class="des">
                     <span> {{App\Models\Category::getNameCategory($produto->id_category)[0]->name_category}} </span>
                     <h5>{{$produto->name_product}}</h5>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
                     <h4>{{$produto->price_unit}}</h4>
                 </div>
                 <a href="#"><i class="fal fa-shopping-cart cart"></i></a>
-            </div>
             </a>
+            </div>
         @endforeach            
         </div>
             <!--produto fim -->    
