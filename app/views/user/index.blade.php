@@ -48,7 +48,7 @@
     <section id="banner" class="section-m1">
         <h4>Produtos incriveis </h4>
         <h2>Atualizações <span>Sempre</span> – Sobre Todos os Produtos</h2>
-        <button class="normal">Explore Mais</button>
+        <a href="{{DIRPAGE.'loja'}}"><button class="normal">Explore Mais</button></a>
     </section>
     <!--Banner iformativo 1 toda tela fim-->
 
