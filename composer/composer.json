@@ -3,7 +3,8 @@
 		"psr-4":{
 			"App\\Controllers\\": "../app/controllers/",
 			"App\\Models\\": "../app/models/",
-			"App\\Views\\": "../app/views/"
+			"App\\Views\\": "../app/views/",
+			"Src\\": "../src/"
 		},
 		"files":[
 			"../config/config.php",
