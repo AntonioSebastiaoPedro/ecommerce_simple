@@ -24,13 +24,14 @@
                 <tbody>
                 @foreach ($allItems as $items)
                     @foreach ($items as $produto)
+                    
                     <tr>
                         <td><a href="#"><i class="far fa-times-circle"><button class="normal">Remover</button></i></a></td>
                         <td><img src="{{ DIRIMG.'img/products/'.App\Models\Category::getNameCategory($produto->id_category)[0]->name_category.'/'.$produto->name_product.'/'.$produto->img}}" alt=""></td>
                         <td>{{$produto['attributes']['name_product']}}</td>
                         <td>{{$produto['attributes']['price_unit']}} Akz</td>
-                        <td><input type="number" value="{{$produto['attributes']['quantidade']}}" name="quantidade" id=""></td>
-                        <td>{{$produto['attributes']['price_unit'] * $produto['attributes']['price_unit']}}</td>
+                        <td><input type="number" value="{{$produto['quantity']}}" name="quantity" id=""></td>
+                        <td>{{$produto['attributes']['price_unit'] * $produto['quantity']}}</td>
                     </tr>
                     @endforeach
                 @endforeach

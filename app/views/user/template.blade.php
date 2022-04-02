@@ -15,7 +15,7 @@
 <body>
 
     <section id="cabecalho">
-        <a href="index.html"><img src="@php echo DIRIMG.'img/logotipo.png' @endphp" class="logo" alt=""></a>
+        <a href="@php echo DIRPAGE @endphp"><img src="@php echo DIRIMG.'img/logotipo.png' @endphp" class="logo" alt=""></a>
 
         <div>
             <ul id="barra-navegacao">

@@ -3,6 +3,7 @@ namespace App\Controllers;
 
 use App\Controllers\RoutesController as Rota;
 use App\Models\Produto;
+use Illuminate\Support\Facades\Redirect;
 use \Jenssegers\Blade\Blade;
 use Src\Classes\Cart;
 
@@ -43,8 +44,11 @@ class CarrinhoController extends Cart{
 			'quatidade' => 1
 		]);
 
-		$allItems = $this->cart->getItems();
-		return $this->blade->render('user/carrinho', compact('allItems'));
+		return redir('loja', false);
 		
+	}
+
+	public function limparCarrinho(){
+		$this->cart->clear();
 	}
 }
