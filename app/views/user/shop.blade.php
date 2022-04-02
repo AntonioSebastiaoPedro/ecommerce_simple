@@ -14,8 +14,8 @@
         <div class="pro-container">
             
         @foreach($dados as $produto)
-            <a href="{{ DIRPAGE.'produto/'.$produto->id }}">
             <div class="pro" >
+            <a href="{{ DIRPAGE.'produto/'.$produto->id }}">
                 <img src="{{ DIRIMG.'img/products/'.App\Models\Category::getNameCategory($produto->id_category)[0]->name_category.'/'.$produto->name_product.'/'.$produto->img}}" alt="">
                 <div class="des">
                     <span> {{App\Models\Category::getNameCategory($produto->id_category)[0]->name_category}} </span>
@@ -27,11 +27,11 @@
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
-                    <h4>{{$produto->price_unit}}</h4>
+                    <h4>{{number_format($produto->price_unit, '2', ',', '.')}}</h4>
                 </div>
                 <a href="{{DIRPAGE.'add-carrinho/'.$produto->id}}"><i class="fal fa-shopping-cart cart"></i></a>
+                </a>
             </div>
-            </a>
         @endforeach            
         </div>
     </section>

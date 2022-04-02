@@ -26,12 +26,12 @@
                     @foreach ($items as $produto)
                     
                     <tr>
-                        <td><a href="#"><i class="far fa-times-circle"><button class="normal">Remover</button></i></a></td>
-                        <td><img src="{{ DIRIMG.'img/products/'.App\Models\Category::getNameCategory($produto->id_category)[0]->name_category.'/'.$produto->name_product.'/'.$produto->img}}" alt=""></td>
+                        <td><a href="{{DIRPAGE.'remove-carrinho/'.$produto['id']}}"><i class="far fa-times-circle"><button class="normal">Remover</button></i></a></td>
+                        <td><img src="{{ DIRIMG.'img/products/'.App\Models\Category::getNameCategory($produto['attributes']['id_category'])[0]->name_category.'/'.$produto['attributes']['name_product'].'/'.$produto['attributes']['img']}}" alt=""></td>
                         <td>{{$produto['attributes']['name_product']}}</td>
-                        <td>{{$produto['attributes']['price_unit']}} Akz</td>
+                        <td>{{number_format($produto['attributes']['price_unit'], 2, ',', '.')}} Akz</td>
                         <td><input type="number" value="{{$produto['quantity']}}" name="quantity" id=""></td>
-                        <td>{{$produto['attributes']['price_unit'] * $produto['quantity']}}</td>
+                        <td></td>
                     </tr>
                     @endforeach
                 @endforeach
@@ -42,7 +42,7 @@
         @endif
     </section>
 
-    <section id="cart-add" class="section-p1">
+     <section id="cart-add" class="section-p1">
         <div id="cuopon">
             <h3>Aplicar cupon</h3>
             <div>
@@ -59,12 +59,12 @@
                     <td>480.000 Akz</td>
                 </tr>
                 <tr>
-                    <td>Shipping</td>
-                    <td>Free</td>
+                    <td>14% de Iva</td>
+                    <td>{{number_format($cart->getAttributeTotal('price_unit')*14/100, 2, ',', '.')}} Akz</td>
                 </tr>
                 <tr>
                     <td><strong>Total</strong></td>
-                    <td><strong>480.000 Akz</strong></td>
+                    <td><strong>{{number_format($cart->getAttributeTotal('price_unit'), 2, ',', '.')}} Akz</strong></td>
                 </tr>
             </table>
             <button class="normal">Finalisar compra</button>

@@ -10,4 +10,5 @@ $routes->getRoute('sobre-nos', 'AboutController@index');
 
 $routes->getRoute('carrinho', 'CarrinhoController@index');
 $routes->getRoute('add-carrinho', 'CarrinhoController@addProduto');
+$routes->getRoute('remove-carrinho', 'CarrinhoController@removeProduto');
 $routes->getRoute('limpar', 'CarrinhoController@limparCarrinho');
