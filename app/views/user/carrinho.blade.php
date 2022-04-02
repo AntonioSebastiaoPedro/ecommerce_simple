@@ -9,45 +9,36 @@
     </section>
 
     <section id="cart" class="section-p1">
-        <table width="100%">
-            <thead>
-                <tr>
-                    <td>Remover</td>
-                    <td>Imagens</td>
-                    <td>Produtos</td>
-                    <td>Preço</td>
-                    <td>Quantidade</td>
-                    <td>Subtotal</td>
-                </tr>
-            </thead>
-
-            <tbody>
-                <tr>
-                    <td><a href="#"><i class="far fa-times-circle"></i></a></td>
-                    <td><img src="@php echo DIRIMG.'img/products/tel-1-samsung.png' @endphp" alt=""></td>
-                    <td>Samsung M11</td>
-                    <td>150.000 Akz</td>
-                    <td><input type="number" value="1" name="" id=""></td>
-                    <td>150.000 Akz</td>
-                </tr>
-                <tr>
-                    <td><a href="#"><i class="far fa-times-circle"></i></a></td>
-                    <td><img src="@php echo DIRIMG.'img/products/tel-4-apple.png' @endphp" alt=""></td>
-                    <td>iphone 8 plus</td>
-                    <td>180.000 Akz</td>
-                    <td><input type="number" value="1" name="" id=""></td>
-                    <td>180.000 Akz</td>
-                </tr>
-                <tr>
-                    <td><a href="#"><i class="far fa-times-circle"></i></a></td>
-                    <td><img src="@php echo DIRIMG.'img/products/acessorio-1.png' @endphp" alt=""></td>
-                    <td>Apple watch</td>
-                    <td>150.000 Akz</td>
-                    <td><input type="number" value="1" name="" id=""></td>
-                    <td>150.000 Akz</td>
-                </tr>
-            </tbody>
-        </table>
+        @if($allItems != [])
+            <table width="100%">
+                <thead>
+                    <tr>
+                        <td>Remover</td>
+                        <td>Imagens</td>
+                        <td>Produtos</td>
+                        <td>Preço</td>
+                        <td>Quantidade</td>
+                        <td>Subtotal</td>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach ($allItems as $items)
+                    @foreach ($items as $produto)
+                    <tr>
+                        <td><a href="#"><i class="far fa-times-circle"><button class="normal">Remover</button></i></a></td>
+                        <td><img src="{{ DIRIMG.'img/products/'.App\Models\Category::getNameCategory($produto->id_category)[0]->name_category.'/'.$produto->name_product.'/'.$produto->img}}" alt=""></td>
+                        <td>{{$produto['attributes']['name_product']}}</td>
+                        <td>{{$produto['attributes']['price_unit']}} Akz</td>
+                        <td><input type="number" value="{{$produto['attributes']['quantidade']}}" name="quantidade" id=""></td>
+                        <td>{{$produto['attributes']['price_unit'] * $produto['attributes']['price_unit']}}</td>
+                    </tr>
+                    @endforeach
+                @endforeach
+                </tbody>
+            </table>
+        @else
+            <h4><center>Não tens nenhum produto no Carrinho</center></h4>
+        @endif
     </section>
 
     <section id="cart-add" class="section-p1">

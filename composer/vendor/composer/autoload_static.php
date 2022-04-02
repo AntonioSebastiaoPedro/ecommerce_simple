@@ -31,6 +31,7 @@ class ComposerStaticInitc52dad7ad60e0b20a264681e77aff2eb
             'Symfony\\Contracts\\Translation\\' => 30,
             'Symfony\\Component\\Translation\\' => 30,
             'Symfony\\Component\\Finder\\' => 25,
+            'Src\\Classes\\' => 12,
         ),
         'P' => 
         array (
@@ -92,6 +93,10 @@ class ComposerStaticInitc52dad7ad60e0b20a264681e77aff2eb
         'Symfony\\Component\\Finder\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/finder',
+        ),
+        'Src\\Classes\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/../src/classes',
         ),
         'Psr\\SimpleCache\\' => 
         array (

@@ -29,7 +29,7 @@
                     </div>
                     <h4>{{$produto->price_unit}}</h4>
                 </div>
-                <a href="#"><i class="fal fa-shopping-cart cart"></i></a>
+                <a href="{{DIRPAGE.'add-carrinho/'.$produto->id}}"><i class="fal fa-shopping-cart cart"></i></a>
             </div>
             </a>
         @endforeach            

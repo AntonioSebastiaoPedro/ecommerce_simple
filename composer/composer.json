@@ -4,7 +4,7 @@
 			"App\\Controllers\\": "../app/controllers/",
 			"App\\Models\\": "../app/models/",
 			"App\\Views\\": "../app/views/",
-			"Src\\": "../src/"
+			"Src\\Classes\\": "../src/classes"
 		},
 		"files":[
 			"../config/config.php",
