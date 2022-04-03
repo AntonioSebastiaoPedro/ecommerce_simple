@@ -1,6 +1,11 @@
 @extends('user.template')
 
 @section('body')
+
+    @if (!isset($_SESSION['type_user']))
+        {{redir("entrar", false)}}
+    @endif
+
     <section id="pagina-cabecalho" class="about-header">
 
         <h2>Carrinho</h2>

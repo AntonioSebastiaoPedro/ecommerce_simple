@@ -14,7 +14,6 @@ class HomeController{
 
 	#index
 	public function index(){
-
 		$vendidos = Produto::getMaisVendidos();
 		$recentes = Produto::getMaisRecentes();
 		return $this->blade->render('user/index', compact('vendidos', 'recentes'));

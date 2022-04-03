@@ -43,7 +43,20 @@
         </div>
     </section>
 
+    @if (isset($erros))
+        @if(!empty($erros))
+            @foreach($erros as $erro)
+                <ul class="nav flex-column">
+                <li class="nav-item">
+                    <div class="alert alert-danger" role="alert">
+                        <b> {{$erro}} </b>
+                    </div>
+                </li>
+                </ul>
+            @endforeach
+        @endif
 
+    @endif
     @yield('body')
 
 
@@ -88,7 +101,9 @@
             <h4>Minha conta</h4>
             <a href="{{DIRPAGE.'entrar'}}">Iniciar Sessão</a>
             <a href="{{DIRPAGE.'carrinho'}}">Ver carrinho</a>
-            <a href="{{DIRPAGE.'carrinho'}}">Ver carrinho</a>
+            @if(isset($_SESSION['type_user']))
+                <a href="{{DIRPAGE.'sair'}}">Sair</a>
+            @endif
         </div>
 
         <div class="copyright">

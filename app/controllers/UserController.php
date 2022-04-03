@@ -19,11 +19,12 @@ class UserController extends User{
 
 	#index
 	public function index(){
-        if($_SESSION['type_user'] != null){
+        if(isset($_SESSION['type_user']) AND $_SESSION['type_user'] != null){
             if($_SESSION['type_user'] === 0){
                 return $this->blade->render('admin/index');
             }else{
-                return $this->blade->render('user/index');
+                $home = new HomeController;
+                return $home->index();
             }
         }
         
@@ -42,7 +43,9 @@ class UserController extends User{
 			return $this->index();
 		}
 
-        if(empty($_SESSION)){session_start();};
+        if (session_status() == PHP_SESSION_NONE) {
+			session_start();
+		}
 
         $_SESSION['id_user'] = $user[0]->id;
         $_SESSION['email'] = $user[0]->email;
@@ -52,7 +55,8 @@ class UserController extends User{
         if($user[0]->type_user == 0){
             return redir('admin', false);
         }else{
-            return $this->blade->render('user/index');
+			$home = new HomeController;
+            return $home->index();
         }
 		
 	}
@@ -100,10 +104,10 @@ class UserController extends User{
 		return $this->blade->render('user/checkout', compact('allItems', 'cart', 'iva', 'subtotal', 'total'));		
 	}
 
-	public function limparCarrinho(){
-		$this->cart->clear();
+	public function sair(){
+		session_destroy();
 
-		return redir('carrinho', false);
+		return redir('entrar', false);
 	}
 
     
