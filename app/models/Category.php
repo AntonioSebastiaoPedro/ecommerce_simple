@@ -14,9 +14,9 @@ class Category extends Conexao{
         dd($dados);
     }
 
-	public function getProdutos(){
-		$query = "SELECT * FROM products";
-		$stmt = $this->setConn()->prepare($query);
+	public static function getCategories(){
+		$query = "SELECT * FROM categories";
+		$stmt = self::setConn()->prepare($query);
 		$stmt->execute();
 
 		return $dados = $stmt->fetchAll(\PDO::FETCH_OBJ);

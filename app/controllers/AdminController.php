@@ -5,6 +5,7 @@ use App\Controllers\RoutesController as Rota;
 use App\Models\Category;
 use \Jenssegers\Blade\Blade;
 use \App\Models\Produto;
+use Src\Classes\Upload;
 use \App\Models\User;
 
 class AdminController extends Produto{
@@ -20,17 +21,38 @@ class AdminController extends Produto{
 		return $this->blade->render('admin/index');
 	}
 
-	public function produtoSingle(){
-		$id = isset(Rota::parseUrl()[1]) ? Rota::parseUrl()[1] : null;
-		if($id == null) {
-			$this->index();
-		}else{
-			$outras_fotos = self::getOutrasFotos($id);
-			$vendidos = self::getMaisVendidos();
-			$dados = $this->getProduto($id);
-			return $this->blade->render('user/sproduct', compact('dados', 'vendidos', 'outras_fotos'));
-		}
+	public function cadastrarProduto()
+	{
+		if (count($_POST) > 0) {
+			if (isset($_FILES['img']) and !empty($_FILES['img']['name'])) {
+					$caminho = DIRREQ.'public/img/img/products/'.Category::getNameCategory($_POST['categoria'])[0]->name_category.'/'.$_POST['name_product'].'/';
+					if (!is_dir($caminho)) {
+						mkdir($caminho);
+					}
+					$up_img = Upload::UpImg($caminho, $_FILES['img']);
+						$name_product = filter_input(INPUT_POST, 'name_product', FILTER_SANITIZE_STRING);
+						$price_unit = filter_input(INPUT_POST, 'price_unit', FILTER_SANITIZE_NUMBER_INT);
+						$preco_de_compra =  filter_input(INPUT_POST, 'preco_de_compra', FILTER_SANITIZE_NUMBER_INT);
+						$quantidade =  filter_input(INPUT_POST, 'quantidade', FILTER_SANITIZE_NUMBER_INT);
+						$id_category =  filter_input(INPUT_POST, 'categoria', FILTER_SANITIZE_NUMBER_INT);
+						$id_user = $_SESSION['id_user'];
+						$img = $_FILES['img']['name'];
+						$details = filter_input(INPUT_POST, 'descricao', FILTER_SANITIZE_STRING);
+						
+						$id = $this->addProduto($name_product, $price_unit, $preco_de_compra, $quantidade, $id_category, $id_user, $img, $details);
+						
+							if(isset($_FILES['outras_imgs'])){
+								$outras_imgs = Upload::UpOthersImgs($caminho, $_FILES['outras_imgs']);
+								$this->addOthersImgs($id, $_FILES['outras_imgs']['name']);
+								return redir('admin-produtos', false);
+							}
+						
 
+			}
+
+			return redir('admin-produtos', false);
+		}
+		dd('');
 	}
 
 
@@ -110,7 +132,10 @@ class AdminController extends Produto{
 	}
 
 	public function produtos(){
-		return $this->blade->render('admin/produtos');
+
+		$categorias = Category::getCategories();
+
+		return $this->blade->render('admin/produtos', compact('categorias'));
 	}
 
 	public function stock(){

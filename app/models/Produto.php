@@ -4,7 +4,7 @@ namespace App\Models;
 class Produto extends Conexao{
 
 	public function getProdutos(){
-		$query = "SELECT * FROM products";
+		$query = "SELECT * FROM products WHERE quantidade <> 0";
 		$stmt = $this->setConn()->prepare($query);
 		$stmt->execute();
 
@@ -22,12 +22,39 @@ class Produto extends Conexao{
 	}
 
 
-	public function addProduto($nome, $preco){
-		$query = "INSERT INTO produtos(nome, preco) VALUES(?,?)";
+	public function addProduto($name_product, $price_unit, $preco_de_compra, $quantidade, $id_category, $id_user, $img, $details){
+
+		$query = "INSERT INTO products(name_product, price_unit, preco_de_compra, quantidade, id_category, id_user, img, details)
+		VALUES(?,?,?,?,?,?,?,?)";
 		$stmt = $this->setConn()->prepare($query);
-		$stmt->bindValue(1, $nome);
-		$stmt->bindValue(2, $preco);
+		$stmt->bindValue(1, $name_product);
+		$stmt->bindValue(2, $price_unit);
+		$stmt->bindValue(3, $preco_de_compra);
+		$stmt->bindValue(4, $quantidade);
+		$stmt->bindValue(5, $id_category);
+		$stmt->bindValue(6, $id_user);
+		$stmt->bindValue(7, $img);
+		$stmt->bindValue(8, $details);
 		$stmt->execute();
+
+		if($stmt->rowCount() > 0){
+			$max = $this->setConn()->prepare("SELECT MAX(id) as id FROM products");
+			$max->execute();
+			$id = $max->fetchAll(\PDO::FETCH_OBJ);
+			return ($id[0]->id);
+		}else{
+			return false;
+		}
+	}
+
+	public function addOthersImgs($idProduto, $imgs){
+		foreach ($imgs as $img) {
+			$query = "INSERT INTO others_imgs (idProduct, img) Values(?,?)";
+			$stmt = $this->setConn()->prepare($query);
+			$stmt->bindValue(1, $idProduto);
+			$stmt->bindValue(2, $img);
+			$stmt->execute();
+		}
 	}
 	
 
