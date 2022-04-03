@@ -33,7 +33,7 @@
                     <tbody>
                         @foreach($produtos as $produto)
                         <tr>    
-                            <td>{{$produto->img}}</td>
+                            <td><img width="50" height="70" src="{{DIRIMG.'img/products/'.App\Models\Category::getNameCategory($produto->id_category)[0]->name_category.'/'.$produto->name_product.'/'.$produto->img}}"></td>
                             <td>{{App\Models\Category::getNameCategory($produto->id_category)[0]->name_category}}</td>
                             <td>{{$produto->name_product}}</td>
                             <td>{{$produto->quantidade}}</td>
