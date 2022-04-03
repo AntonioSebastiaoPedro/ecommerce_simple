@@ -22,9 +22,9 @@
 
                             <th>Quantidade</th>
 
-                            <th>Preço</th>
-                            
                             <th>Preço de Compra</th>
+                            
+                            <th>Preço de Venda</th>
         
                             <th>Operações</th>
 
@@ -37,8 +37,8 @@
                             <td>{{App\Models\Category::getNameCategory($produto->id_category)[0]->name_category}}</td>
                             <td>{{$produto->name_product}}</td>
                             <td>{{$produto->quantidade}}</td>
-                            <td>{{number_format($produto->price_unit), 2, ',', '.'}}</td>
-                            <td>{{number_format($produto->preco_de_compra), 2, ',', '.'}}</td>
+                            <td>{{number_format($produto->preco_de_compra), 2, ',', '.'}} kz</td>
+                            <td>{{number_format($produto->price_unit), 2, ',', '.'}} kz</td>
                             <td>
                                 <a href="#"><button class="btn btn-sm btn-primary">Editar</button></a>
                                 <a href="#"><button class="btn btn-sm btn-danger">Eliminar</button></a>
