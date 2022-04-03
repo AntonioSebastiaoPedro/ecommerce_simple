@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BHJVV Ecommerce! @yield('tittle') </title>
+    <title>BHJVV E-commerce! @yield('tittle') </title>
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
     <link rel="shortcut icon" href="@php echo DIRIMG.'img/logotipo.png' @endphp">
-
+    @yield('css')
     <link rel="stylesheet" href="@php echo DIRCSS.'style.css' @endphp">
 </head>
 
@@ -25,8 +25,9 @@
                 <!--nav direita-->
                 <div class="barra-navegacao-direita">
 
-                <li id="lg-carrinho"><a class="@yield('active4')" href="@php echo DIRPAGE.'carrinho' @endphp" class="carrinho"><i class="far fa-shopping-bag"></i><i class="fa-solid fa-cart-shopping"></i>
-                    <span>0</span></a></li>
+                <li id="lg-carrinho"><a href="@php echo DIRPAGE.'carrinho' @endphp" class="carrinho"><i class="far fa-shopping-bag"></i><i class="fa-solid fa-cart-shopping"></i>
+                    <span>0
+                    </span></a></li>
                 
                 </div>
                 <!--nav direita fim-->
@@ -79,14 +80,14 @@
 
         <div class="col">
             <h4>Sobre</h4>
-            <a href="€php echo DIRGPAGE.'sobre-nós' @endphp">sobre nós</a>
+            <a href="€php echo DIRGPAGE.'sobre-nós' @endphp">Sobre nós</a>
             <a href="@php echo DIRPAGE.'contactar' @endphp">Contacta-nos</a>
         </div>
 
         <div class="col">
             <h4>Minha conta</h4>
-            <a href="#">Sign In</a>
-            <a href="#">Ver carrinho</a>
+            <a href="{{DIRPAGE.'entrar'}}">Iniciar Sessão</a>
+            <a href="{{DIRPAGE.'carrinho'}}">Ver carrinho</a>
         </div>
 
         <div class="copyright">

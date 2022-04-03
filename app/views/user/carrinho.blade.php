@@ -26,7 +26,7 @@
                     @foreach ($items as $produto)
                     
                     <tr>
-                        <td><a href="{{DIRPAGE.'remove-carrinho/'.$produto['id']}}"><i class="far fa-times-circle"><button class="normal">Remover</button></i></a></td>
+                        <td><a href="{{DIRPAGE.'remove-carrinho/'.$produto['id']}}"><i class="far fa-times-circle"></i></a></td>
                         <td><img src="{{ DIRIMG.'img/products/'.App\Models\Category::getNameCategory($produto['attributes']['id_category'])[0]->name_category.'/'.$produto['attributes']['name_product'].'/'.$produto['attributes']['img']}}" alt=""></td>
                         <td>{{$produto['attributes']['name_product']}}</td>
                         <td>{{number_format($produto['attributes']['price_unit'], 2, ',', '.')}} Akz</td>
@@ -37,9 +37,6 @@
                 @endforeach
                 </tbody>
             </table>
-        @else
-            <h4><center>Não tens nenhum produto no Carrinho</center></h4>
-        @endif
     </section>
 
      <section id="cart-add" class="section-p1">
@@ -56,20 +53,29 @@
             <table>
                 <tr>
                     <td>Subtotal</td>
-                    <td>480.000 Akz</td>
+                    <td>{{number_format($cart->getAttributeTotal('price_unit'), 2, ',', '.')}} Akz</td>
                 </tr>
                 <tr>
                     <td>14% de Iva</td>
-                    <td>{{number_format($cart->getAttributeTotal('price_unit')*14/100, 2, ',', '.')}} Akz</td>
+                    <td>{{$iva = number_format($cart->getAttributeTotal('price_unit')*14/100, 2, ',', '.')}} Akz</td>
                 </tr>
                 <tr>
                     <td><strong>Total</strong></td>
-                    <td><strong>{{number_format($cart->getAttributeTotal('price_unit'), 2, ',', '.')}} Akz</strong></td>
+                    <td><strong>{{number_format($cart->getAttributeTotal('price_unit')+$cart->getAttributeTotal('price_unit')*14/100, 2, ',', '.')}} Akz</strong></td>
                 </tr>
             </table>
-            <button class="normal">Finalisar compra</button>
+            <form action="{{DIRPAGE.'finalizar-compra'}}" method="post">
+                <input type="hidden" name="total" value="{{$cart->getAttributeTotal('price_unit')+$cart->getAttributeTotal('price_unit')*14/100}}">
+                <input type="hidden" name="subtotal" value="{{$cart->getAttributeTotal('price_unit')}}">
+                <input type="hidden" name="iva" value="{{$cart->getAttributeTotal('price_unit')*14/100}}">
+                <button type="submit" class="normal">Finalisar compra</button>
+            </form><br>
+            <a href="{{DIRPAGE.'limpar-carrinho'}}"><button class="normal">Limpar carrinho</button></a>
         </div>
     </section>
+    @else
+            <h4 style="margin-top: 20px; margin-bottom: 200px;"><center>Não tens nenhum produto no Carrinho</center></h4>
+    @endif
 
 
 @endsection

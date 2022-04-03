@@ -2,6 +2,7 @@
 namespace App\Models;
 
 class Category extends Conexao{
+	public $erros = [];
 
     public static function getNameCategory($idCategory){
         $query = "SELECT name_category FROM categories WHERE id = ?";
@@ -32,12 +33,24 @@ class Category extends Conexao{
 	}
 
 
-	public function addProduto($nome, $preco){
-		$query = "INSERT INTO produtos(nome, preco) VALUES(?,?)";
-		$stmt = $this->setConn()->prepare($query);
+	public function addCategoria($nome){
+		$query1 = "SELECT * FROM categories WHERE name_category = ?";
+		$stmt = $this->setConn()->prepare($query1);
 		$stmt->bindValue(1, $nome);
-		$stmt->bindValue(2, $preco);
 		$stmt->execute();
+		if ($stmt->rowCount() > 0) {
+			array_push($this->erros, "Já existe uma categoria com esse nome.");
+			return false;
+		}
+
+		$query2 = "INSERT INTO categories(name_category) VALUES(?)";
+		$stmt = $this->setConn()->prepare($query2);
+		$stmt->bindValue(1, $nome);
+		$stmt->execute();
+
+		if ($stmt->rowCount() > 0) {
+			return true;
+		}
 	}
 	
 

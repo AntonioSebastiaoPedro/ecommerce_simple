@@ -49,6 +49,7 @@ class CarrinhoController extends Cart{
 			'subtotal'   => $produto[0]->quatity * $produto[0]->price_unit
 		]);
 
+		flash('delete_yes', '<b>Produto adicionado ao carrinho com sucesso!</b>', 'alert alert-success');
 		return redir('loja', false);
 		
 	}
@@ -62,10 +63,22 @@ class CarrinhoController extends Cart{
 
 		$this->cart->remove($id);
 
-		$this->index();
+		return $this->index();
+	}
+
+	public function finalizar(){
+		$iva = $_POST['iva'];
+		$subtotal = $_POST['subtotal'];
+		$total = $_POST['total'];
+		$cart = $this->cart;
+		$allItems = $this->cart->getItems();
+
+		return $this->blade->render('user/checkout', compact('allItems', 'cart', 'iva', 'subtotal', 'total'));		
 	}
 
 	public function limparCarrinho(){
 		$this->cart->clear();
+
+		return redir('carrinho', false);
 	}
 }

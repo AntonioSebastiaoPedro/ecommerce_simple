@@ -1,7 +1,7 @@
 <?php
 namespace App\Controllers;
 
-use \Controllers\RoutesController as Rota;
+use App\Controllers\RoutesController as Rota;
 use \Jenssegers\Blade\Blade;
 use App\Models\Produto;
 

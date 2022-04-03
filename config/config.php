@@ -13,6 +13,7 @@ define("DIRCSS", DIRPAGE."public/css/");
 define("DIRJS", DIRPAGE."public/js/");
 define("DIRBSCSS", DIRPAGE."public/bootstrap/css/");
 define("DIRBSJS", DIRPAGE."public/bootstrap/js/");
+define("DIRPRODUCTS", DIRREQ."public/img/img/products/");
 
 #CONSTANTES DA BD
 define("HOST", "localhost");
