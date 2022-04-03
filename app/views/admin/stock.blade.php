@@ -14,70 +14,37 @@
         
                 <table class="table table-bordered table-hover mt-5">
                     <thead>
-                        
-                            <th>
-                                Id
-                            </th>
+                            <th>Imagem</th>
+
+                            <th>Categoria</th>
         
-                            <th>
-                                Categoria
-                            </th>
-        
-                            <th>
-                                produto
-                            </th>
+                            <th>Produto</th>
 
+                            <th>Quantidade</th>
 
-                            <th>
-                                quantidade
-                            </th>
-
-                            <th>
-                                Preço uni
-                            </th>
+                            <th>Preço</th>
                             
-                            <th>
-                                Data de Cadastro
-                            </th>
+                            <th>Preço de Compra</th>
         
-                            <th>
-                                editar
-                            </th>
+                            <th>Operações</th>
 
-                            <th>
-                                deletar
-                            </th>
                         
                     </thead>
                     <tbody>
-        
+                        @foreach($produtos as $produto)
                         <tr>    
-                            <td>1</td>
-                            <td>Acessorio</td>
-                            <td>Suporte para telefone</td>
-                            <td>3</td>
-                            <td>1500 kz</td>
-                            <td>25/03/2022</td>
+                            <td>{{$produto->img}}</td>
+                            <td>{{App\Models\Category::getNameCategory($produto->id_category)[0]->name_category}}</td>
+                            <td>{{$produto->name_product}}</td>
+                            <td>{{$produto->quantidade}}</td>
+                            <td>{{number_format($produto->price_unit), 2, ',', '.'}}</td>
+                            <td>{{number_format($produto->preco_de_compra), 2, ',', '.'}}</td>
                             <td>
-                            <form action="" method="post">
-                                    <input type="hidden"  name="id" value="">
-                                    <button class="btn btn-sm btn-primary" name="editar">
-                                        Editar
-                                    </button>
-                                </form>
+                                <a href="#"><button class="btn btn-sm btn-primary">Editar</button></a>
+                                <a href="#"><button class="btn btn-sm btn-danger">Eliminar</button></a>
                             </td>
-
-                            <td>
-                            <form action="" method="post">
-                                    <input type="hidden"  name="id" value="">
-                                    <button class="btn btn-sm btn-danger" name="deletar">
-                                        Eliminar
-                                    </button>
-                                </form>
-                            </td>
-
                         </tr>
-
+                        @endforeach
                     </tbody>
                 </table>
             </div>

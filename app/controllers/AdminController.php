@@ -114,7 +114,8 @@ class AdminController extends Produto{
 	}
 
 	public function stock(){
-		return $this->blade->render('admin/stock');
+		$produtos = $this->getProdutos();
+		return $this->blade->render('admin/stock', compact('produtos'));
 	}
 
 	public function users(){
