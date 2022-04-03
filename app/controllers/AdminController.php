@@ -117,17 +117,9 @@ class AdminController extends Produto{
 	}
 
 
-
-
-
-
-
-
-
-
-
 	public function categorias(){
-		return $this->blade->render('admin/categoria');
+		$categorias = Category::getCategories();
+		return $this->blade->render('admin/categoria', compact('categorias'));
 	}
 
 	public function produtos(){

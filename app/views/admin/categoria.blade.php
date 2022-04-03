@@ -26,43 +26,28 @@
                 <table class="table table-light mt-5">
                     <thead>
                         <tr>
-                            <th>
-                                Id
-                            </th>
+                            <th>Nome da Categoria</th>
         
-                            <th>
-                                Nome Categoria
-                            </th>
+                            <th>Data de Cadastro</th>
         
-                            <th>
-                                Data de Cadastro
-                            </th>
-        
-                            <th>
-                                Opções
-                            </th>
+                            <th>Opções</th>
                         </tr>
                     </thead>
+
                     <tbody>
-        
-                        <tr>    
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                        @if(isset($categorias))
+                        @foreach($categorias as $categoria)
+                        <tr>
+                            <td>{{$categoria->name_category}}</td>
+                            <td>{{$categoria->data_create}}</td>
                             <td>
-                            <form action="" method="post">
-                                    <input type="hidden"  name="id" value="">
-                                    <button class="btn btn-sm btn-danger" name="deletar">
-                                        Eliminar
-                                    </button>
-                                     
-                                    <button class="btn btn-sm btn-primary" name="editar">
-                                        Editar
-                                    </button>
-        
-                                  </form>
+                                <a href="{{DIRPAGE.'admin-editar-categoria'}}"><button class="btn btn-md btn-warning">
+                                    Editar
+                                </button></a>
                             </td>
                         </tr>
+                        @endforeach
+                        @endif
                     </tbody>
                 </table>
             </div>
