@@ -41,7 +41,7 @@
                             <td>{{number_format($produto->price_unit), 2, ',', '.'}} kz</td>
                             <td>
                                 <a href="#"><button class="btn btn-sm btn-primary">Editar</button></a>
-                                <a href="#"><button class="btn btn-sm btn-danger">Eliminar</button></a>
+                                <a href="{{DIRPAGE.'admin-eliminar-produto/'.$produto->id}}"><button class="btn btn-sm btn-danger">Eliminar</button></a>
                             </td>
                         </tr>
                         @endforeach

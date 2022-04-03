@@ -70,10 +70,11 @@ class Produto extends Conexao{
 
 
 	public function deleteProduto($id){
-		$query = "DELETE FROM  produtos WHERE id = ?";
+		$query = "DELETE FROM  products WHERE id = ?";
 		$stmt = $this->setConn()->prepare($query);
 		$stmt->bindValue(1, $id);
 		$stmt->execute();
+		$this->setConn()->prepare("DELETE FROM others_imgs WHERE idProduct = ".$id)->execute();
 	}
 
 

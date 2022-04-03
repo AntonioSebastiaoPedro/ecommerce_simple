@@ -6,7 +6,7 @@ use App\Models\Category;
 use \Jenssegers\Blade\Blade;
 use \App\Models\Produto;
 use Src\Classes\Upload;
-use \App\Models\User;
+use \App\Controllers\ProdutoController;
 
 class AdminController extends Produto{
 	private $blade;
@@ -40,7 +40,7 @@ class AdminController extends Produto{
 						$details = filter_input(INPUT_POST, 'descricao', FILTER_SANITIZE_STRING);
 						
 						$id = $this->addProduto($name_product, $price_unit, $preco_de_compra, $quantidade, $id_category, $id_user, $img, $details);
-						
+
 							if(isset($_FILES['outras_imgs'])){
 								$outras_imgs = Upload::UpOthersImgs($caminho, $_FILES['outras_imgs']);
 								$this->addOthersImgs($id, $_FILES['outras_imgs']['name']);
@@ -110,11 +110,10 @@ class AdminController extends Produto{
 
 
 	public function delete(){
-		$id = isset(Rota::parseUrl()[1]) ? Rota::parseUrl()[1] : null;
-		$this->deleteProduto($id);
+		$produto = new ProdutoController;
+		$produto->delete();
 		flash('delete_yes', '<b>Produto eliminado com sucesso!</b>', 'alert alert-success');
-				redir("produto", false);
-
+		redir("admin-stock", false);
 	}
 
 
