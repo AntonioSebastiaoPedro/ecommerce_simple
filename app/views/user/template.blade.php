@@ -88,6 +88,7 @@
             <h4>Minha conta</h4>
             <a href="{{DIRPAGE.'entrar'}}">Iniciar Sessão</a>
             <a href="{{DIRPAGE.'carrinho'}}">Ver carrinho</a>
+            <a href="{{DIRPAGE.'carrinho'}}">Ver carrinho</a>
         </div>
 
         <div class="copyright">

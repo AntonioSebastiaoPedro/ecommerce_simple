@@ -12,15 +12,6 @@ class User extends Conexao{
 	}
 
 
-    public function getU(){
-		$query = "SELECT * FROM users";
-		$stmt = $this->setConn()->prepare($query);
-		$stmt->execute();
-
-		return $dados = $stmt->fetchAll(\PDO::FETCH_OBJ);
-	}
-
-
 	public function getUser($email, $senha){
 		$query = "SELECT * FROM users WHERE email = ? AND senha = ?";
 		$stmt = $this->setConn()->prepare($query);
@@ -32,12 +23,24 @@ class User extends Conexao{
 	}
 
 
-	public function addUser($nome, $preco){
-		$query = "INSERT INTO users(nome, preco) VALUES(?,?)";
+	public function addUser($nome, $email, $senha){
+
+		$user = $this->setConn()->prepare("SELECT * FROM users WHERE email = ".$email);
+		$user->execute();
+
+		if ($user->rowCount() > 0) {
+			return false;
+		}
+
+		$query = "INSERT INTO users(type_user, name_user, email, senha) VALUES(?,?,?,?)";
 		$stmt = $this->setConn()->prepare($query);
-		$stmt->bindValue(1, $nome);
-		$stmt->bindValue(2, $preco);
+		$stmt->bindValue(1, 1);
+		$stmt->bindValue(2, $nome);
+		$stmt->bindValue(3, $email);
+		$stmt->bindValue(4, $senha);
 		$stmt->execute();
+
+		return true;
 	}
 	
 

@@ -1,4 +1,4 @@
-@extends(user.template)
+@extends('user.template')
 @section('active3', 'active')
 
 @section('body')

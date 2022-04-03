@@ -1,3 +1,6 @@
+@extends('user.template')
+
+@section('body')
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,10 +24,8 @@
     </form>
 
     <div class="not-member">
-      Ainda não é membro? <a href="form-cadastro.html">Registre-se agora</a>
+      Ainda não é membro? <a href="{{DIRPAGE.'criar-conta'}}">Registre-se agora</a>
     </div>
-  </div>
+  </div><br><br>
 
-
-</body>
-</html>
+  @endsection

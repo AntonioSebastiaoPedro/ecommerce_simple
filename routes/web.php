@@ -17,6 +17,8 @@ $routes->getRoute('limpar-carrinho', 'CarrinhoController@limparCarrinho');
 $routes->getRoute('entrar', 'UserController@index');
 $routes->getRoute('login', 'UserController@entrar');
 $routes->getRoute('admin', 'UserController@admin');
+$routes->getRoute('sair', 'UserController@sair');
+$routes->getRoute('criar-conta', 'UserController@criarConta');
 
 
 $routes->getRoute('admin-sair', 'AdminController@sair');

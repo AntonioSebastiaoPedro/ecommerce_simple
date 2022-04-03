@@ -3,7 +3,7 @@ namespace App\Controllers;
 
 use App\Controllers\RoutesController as Rota;
 use App\Models\Produto;
-use App\Models\Category;
+use App\Controllers\HomeController;
 use App\Models\User;
 use \Jenssegers\Blade\Blade;
 use Src\Classes\Cart;
@@ -19,8 +19,8 @@ class UserController extends User{
 
 	#index
 	public function index(){
-        if(!empty($_SESSION)){
-            if($_SESSION['type_user'] == 0){
+        if($_SESSION['type_user'] != null){
+            if($_SESSION['type_user'] === 0){
                 return $this->blade->render('admin/index');
             }else{
                 return $this->blade->render('user/index');
@@ -29,11 +29,13 @@ class UserController extends User{
         
 		return $this->blade->render('user/form-login');
 	}
+
     public function admin(){
 		return $this->blade->render('admin/index');
 	}
 
 	public function entrar(){
+
         $user = $this->getUser($_POST['email'], $_POST['senha']);
         
 		if(empty($user)) {
@@ -53,6 +55,27 @@ class UserController extends User{
             return $this->blade->render('user/index');
         }
 		
+	}
+
+	public function criarConta(){
+		if (isset($_POST['add'])) {
+			$nome = filter_input(INPUT_POST, 'nome', FILTER_DEFAULT);
+			$email = filter_input(INPUT_POST, 'email', FILTER_DEFAULT);
+			$senha = filter_input(INPUT_POST, 'senha', FILTER_DEFAULT);
+
+			if($this->addUser($nome, $email, $senha)){
+				$user = $this->getUser($email, $senha);
+				$_SESSION['id_user'] = $user[0]->id;
+				$_SESSION['email'] = $user[0]->email;
+				$_SESSION['type_user'] = $user[0]->type_user;
+				$_SESSION['name_user'] = $user[0]->name_user;
+
+				$home = new HomeController;
+				$home->index();
+			}
+		}else{
+			return $this->blade->render('user/form-cadastro');
+		}
 	}
 
 	public function removeProduto()
