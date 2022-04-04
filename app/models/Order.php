@@ -50,26 +50,22 @@ class Order extends Conexao{
 
     public static function getUserOrders(){
 		$query = "SELECT * FROM orders INNER JOIN products_order ON orders.id = products_order.id_encomenda
-				  INNER JOIN products ON products_order.id_produto = products.id;
-				  WHERE id_user = ".$_SESSION['id_user']. " AND status_entrega <> ? OR status_entrega = ?";
+				  INNER JOIN products ON products_order.id_produto = products.id
+				  WHERE orders.id_user = {$_SESSION['id_user']} AND orders.status_entrega = ?";
 		$stmt = self::setConn()->prepare($query);
-		$stmt->bindValue(1, "Entregue");
-		$stmt->bindValue(2, "Cancelado");
+		$stmt->bindValue(1, 'Por Entregar');
 		$stmt->execute();
         
-		return $dados = $stmt->fetchAll(\PDO::FETCH_OBJ);
+		return $stmt->fetchAll(\PDO::FETCH_OBJ);
 	}
 
-	public static function getOneUserOrders(){
-		$query = "SELECT * FROM orders INNER JOIN products_order ON orders.id = products_order.id_encomenda
-				  INNER JOIN products ON products_order.id_produto = products.id;
-				  WHERE id_user = ".$_SESSION['id_user']. " AND status_entrega <> ? OR status_entrega = ?";
+	public static function cancelUserOrder(){
+		$query = "UPDATE orders SET status_entrega = ? WHERE id_user = ".$_SESSION['id_user'];
 		$stmt = self::setConn()->prepare($query);
-		$stmt->bindValue(1, "Entregue");
-		$stmt->bindValue(2, "Cancelado");
+		$stmt->bindValue(1, "Cancelado");
 		$stmt->execute();
         
-		return $dados = $stmt->fetchAll(\PDO::FETCH_OBJ);
+		return true;
 	}
 
 

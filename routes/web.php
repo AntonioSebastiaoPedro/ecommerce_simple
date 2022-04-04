@@ -15,6 +15,7 @@ $routes->getRoute('finalizar-compra', 'CarrinhoController@finalizar');
 $routes->getRoute('checkout', 'CarrinhoController@checkout');
 $routes->getRoute('limpar-carrinho', 'CarrinhoController@limparCarrinho');
 $routes->getRoute('encomenda', 'CarrinhoController@encomenda');
+$routes->getRoute('cancelar-encomenda', 'CarrinhoController@cancelEncomenda');
 
 $routes->getRoute('entrar', 'UserController@index');
 $routes->getRoute('login', 'UserController@entrar');

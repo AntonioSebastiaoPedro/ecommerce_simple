@@ -3,11 +3,11 @@
 @section('body')
     <div class="jumbotron">
         <h1 class="display-4">Olá, {{$_SESSION['name_user']}}</h1>
+        @if (isset($tipo_pagamento) AND $tipo_pagamento == "Tranferência")
         <p class="lead">A sua encomenda está em processamento, por favor aguarde em sua localização para entrega.</p>
         <hr class="my-4">
-        @if (isset($tipo_pagamento) AND $tipo_pagamento == "Tranferência")
         <b><p>Se Ainda Não o Fez, Envie o Compravativo da Transferência Para o Nosso Whatsapp .</p></b>
-        @endif
+
     </div>
 
     <div class="container">
@@ -60,6 +60,12 @@
                 
             </tbody>
           </table>
-          <button class="btn btn-danger btn-block">Cancelar Encomenda</button>
+          <a href="{{DIRPAGE.'cancelar-encomenda'}}"><button class="btn btn-danger btn-block">Cancelar Encomenda</button></a>
+        @else
+        <div class="alert alert-primary" role="alert">
+            <h4 class="alert-heading">Sem Encomendas</h4>
+            <p>Você Não Tem Nenhum Encomenda Pendente.</p>
+          </div>
+        @endif
     </div>
 @endsection

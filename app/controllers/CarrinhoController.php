@@ -105,13 +105,20 @@ class CarrinhoController extends Cart{
 
 	public function encomenda(){
 		$order = new Order;
-		$encomenda = $order::getUserOrders();
+		if(empty($encomenda = $order::getUserOrders())){
+			return $this->blade->render('user/encomenda');
+		}
 
 		$tipo_pagamento = ($order::getUserOrders()[0]->tipo_pagamento == "Tranferência") ? "Tranferência" : "Na Entrega";
 		
 		return $this->blade->render('user/encomenda', compact('encomenda', 'tipo_pagamento'));
+	}
 
-
+	public function cancelEncomenda(){
+		$order = new Order;
+		$order->cancelUserOrder();
+		flash('add_yes', '<b>Encomenda cancelada com sucesso!</b>', 'alert alert-success');
+		$this->limparCarrinho();
 	}
 
 	public function limparCarrinho(){
