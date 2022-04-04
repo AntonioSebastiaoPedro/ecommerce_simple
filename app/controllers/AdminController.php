@@ -7,6 +7,7 @@ use \Jenssegers\Blade\Blade;
 use \App\Models\Produto;
 use Src\Classes\Upload;
 use \App\Controllers\ProdutoController;
+use App\Models\Order;
 
 class AdminController extends Produto{
 	private $blade;
@@ -52,7 +53,6 @@ class AdminController extends Produto{
 
 			return redir('admin-produtos', false);
 		}
-		dd('');
 	}
 
 
@@ -138,6 +138,26 @@ class AdminController extends Produto{
 		return $this->blade->render('admin/users');
 	}
 
+	public function encomendas(){
+		if(is_null($orders = Order::getOrders())){
+			return $this->blade->render('admin/encomendas');
+		}
+		return $this->blade->render('admin/encomendas', compact('orders'));
+	}
+
+	public function encomendaPaga(){
+		if(is_null($orders = Order::getOrders())){
+			return $this->blade->render('admin/encomendas');
+		}
+		return $this->blade->render('admin/encomendas', compact('orders'));
+	}
+
+	public function encomendaPaga(){
+		if(is_null($orders = Order::getOrders())){
+			return $this->blade->render('admin/encomendas');
+		}
+		return $this->blade->render('admin/encomendas', compact('orders'));
+	}
 
 	public function sair(){
 		session_destroy();

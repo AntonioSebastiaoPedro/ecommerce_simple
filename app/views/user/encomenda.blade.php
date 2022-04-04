@@ -3,11 +3,12 @@
 @section('body')
     <div class="jumbotron">
         <h1 class="display-4">Olá, {{$_SESSION['name_user']}}</h1>
-        @if (isset($tipo_pagamento) AND $tipo_pagamento == "Tranferência")
-        <p class="lead">A sua encomenda está em processamento, por favor aguarde em sua localização para entrega.</p>
-        <hr class="my-4">
-        <b><p>Se Ainda Não o Fez, Envie o Compravativo da Transferência Para o Nosso Whatsapp .</p></b>
-
+        @if (isset($tipo_pagamento))
+          <p class="lead">A sua encomenda está em processamento, por favor aguarde em sua localização para entrega.</p>
+          <hr class="my-4">
+          @if ($tipo_pagamento == "Tranferência")
+            <b><p>Se Ainda Não o Fez, Envie o Compravativo da Transferência Para o Nosso Whatsapp .</p></b>
+          @endif
     </div>
 
     <div class="container">

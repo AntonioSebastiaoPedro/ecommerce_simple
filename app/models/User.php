@@ -1,6 +1,8 @@
 <?php
 namespace App\Models;
 
+use PDO;
+
 class User extends Conexao{
 
 	public function getUsers(){
@@ -20,6 +22,15 @@ class User extends Conexao{
 		$stmt->execute();
 
 		return $dados = $stmt->fetchAll(\PDO::FETCH_OBJ);
+	}
+
+	public static function getUserById($id){
+		$query = "SELECT name_user FROM users WHERE id = ? ";
+		$stmt = self::setConn()->prepare($query);
+		$stmt->bindValue(1, $id);
+		$stmt->execute();
+
+		return $stmt->fetch(PDO::FETCH_ASSOC);
 	}
 
 

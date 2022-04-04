@@ -41,11 +41,12 @@ class Order extends Conexao{
     
 
 	public static function getOrders(){
-		$query = "SELECT * FROM orders";
+		$query = "SELECT * FROM orders INNER JOIN products_order ON orders.id = products_order.id_encomenda
+				  INNER JOIN products ON products_order.id_produto = products.id";
 		$stmt = self::setConn()->prepare($query);
 		$stmt->execute();
-
-		return $dados = $stmt->fetchAll(\PDO::FETCH_OBJ);
+        
+		return $stmt->fetchAll(\PDO::FETCH_OBJ);
 	}
 
     public static function getUserOrders(){
