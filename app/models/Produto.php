@@ -1,6 +1,8 @@
 <?php
 namespace App\Models;
 
+use PDO;
+
 class Produto extends Conexao{
 
 	public function getProdutos(){
@@ -101,6 +103,22 @@ class Produto extends Conexao{
 		$stmt->execute();
 
 		return $dados = $stmt->fetchAll(\PDO::FETCH_OBJ);
+	}
+
+	public static function countProducts(){
+		$query = "SELECT * FROM products";
+		$stmt = self::setConn()->prepare($query);
+		$stmt->execute();
+
+		return $dados = $stmt->rowCount();
+	}
+
+	public static function countStock(){
+		$query = "SELECT SUM(quantidade) quantidade FROM products";
+		$stmt = self::setConn()->prepare($query);
+		$stmt->execute();
+
+		return $stmt->fetch(PDO::FETCH_ASSOC)['quantidade'];
 	}
 	
 

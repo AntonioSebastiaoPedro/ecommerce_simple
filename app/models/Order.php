@@ -118,11 +118,11 @@ class Order extends Conexao{
 	}
 
 	public static function countOrders(){
-		$query = "SELECT * FROM products";
+		$query = "SELECT * FROM orders";
 		$stmt = self::setConn()->prepare($query);
 		$stmt->execute();
 
-		dd($dados = $stmt->rowCount());
+		return $dados = $stmt->rowCount();
 	}
 	
 

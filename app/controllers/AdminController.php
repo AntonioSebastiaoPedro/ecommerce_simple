@@ -21,7 +21,7 @@ class AdminController extends Produto{
 	public function index(){
 		dd("");
 		dd(Order::countOrders());
-		//return $this->blade->render('admin/index');
+		return $this->blade->render('admin/index');
 	}
 
 	public function cadastrarProduto()

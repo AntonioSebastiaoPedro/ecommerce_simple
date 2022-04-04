@@ -4,6 +4,8 @@ namespace App\Controllers;
 use App\Controllers\RoutesController as Rota;
 use App\Models\Order;
 use App\Controllers\HomeController;
+use App\Models\Category;
+use App\Models\Produto;
 use App\Models\User;
 use \Jenssegers\Blade\Blade;
 use Src\Classes\Cart;
@@ -32,7 +34,12 @@ class UserController extends User{
 	}
 
     public function admin(){
-		return $this->blade->render('admin/index');
+		$encomendas = Order::countOrders();
+		$caterorias = Category::countCategories();
+		$produtos = Produto::countProducts();
+		$stock = Produto::countStock();
+		$users = User::countUsers();
+		return $this->blade->render('admin/index', compact('encomendas', 'caterorias', 'produtos', 'stock', 'users'));
 	}
 
 	public function entrar(){

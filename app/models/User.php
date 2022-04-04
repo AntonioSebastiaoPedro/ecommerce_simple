@@ -98,6 +98,14 @@ class User extends Conexao{
 
 		return $dados = $stmt->fetchAll(\PDO::FETCH_OBJ);
 	}
+
+	public static function countUsers(){
+		$query = "SELECT * FROM users";
+		$stmt = self::setConn()->prepare($query);
+		$stmt->execute();
+
+		return $dados = $stmt->rowCount();
+	}
 	
 
 

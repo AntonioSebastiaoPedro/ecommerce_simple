@@ -25,6 +25,8 @@
                             <th>Preço de Compra</th>
                             
                             <th>Preço de Venda</th>
+
+                            <th>Lucro</th>
         
                             <th>Operações</th>
 
@@ -39,6 +41,7 @@
                             <td>{{$produto->quantidade}}</td>
                             <td>{{number_format($produto->preco_de_compra), 2, ',', '.'}} kz</td>
                             <td>{{number_format($produto->price_unit), 2, ',', '.'}} kz</td>
+                            <td>{{number_format($produto->price_unit-$produto->preco_de_compra), 2, ',', '.'}} kz</td>
                             <td>
                                 <a href="#"><button class="btn btn-sm btn-primary">Editar</button></a>
                                 <a href="{{DIRPAGE.'admin-eliminar-produto/'.$produto->id}}"><button class="btn btn-sm btn-danger">Eliminar</button></a>

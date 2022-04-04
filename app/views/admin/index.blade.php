@@ -12,7 +12,7 @@
                             <h4 class="font-weigth-light">Categoria</h4>
                             <hr>
                             <h5>
-                                 <b>3</b>
+                                 <b>{{$caterorias ?? 0}}</b>
                             </h5>
                         </div>
                     </div>
@@ -27,7 +27,7 @@
                             <h4 class="font-weigth-light"> <i class="fa-solid fa-clipboard-list"></i> Produtos</h4>
                             <hr>
                             <h5>
-                                <b>3</b>
+                                <b>{{$produtos ?? 0}}</b>
                             </h5>
                         </div>
                     </div>
@@ -42,7 +42,7 @@
                             <h4 class="font-weigth-light">Estoque</h4>
                             <hr>
                             <h5>
-                                <b>3</b>
+                                <b>{{$stock ?? 0}}</b>
                             </h5>
                         </div>
                     </div>
@@ -56,7 +56,7 @@
                             <h4 class="font-weigth-light">Users</h4>
                             <hr>
                             <h5>
-                                <b>3</b>
+                                <b>{{$users ?? 0}}</b>
                             </h5>
                         </div>
                     </div>

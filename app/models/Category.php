@@ -11,7 +11,6 @@ class Category extends Conexao{
 		$stmt->execute();
 
 		return $dados = $stmt->fetchAll(\PDO::FETCH_OBJ);
-        dd($dados);
     }
 
 	public static function getCategories(){
@@ -70,6 +69,14 @@ class Category extends Conexao{
 		$stmt = $this->setConn()->prepare($query);
 		$stmt->bindValue(1, $id);
 		$stmt->execute();
+	}
+
+	public static function countCategories(){
+		$query = "SELECT * FROM categories";
+		$stmt = self::setConn()->prepare($query);
+		$stmt->execute();
+
+		return $stmt->rowCount();
 	}
 
 	

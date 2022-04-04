@@ -8,7 +8,7 @@
 
             
                 
-          <form action="{{DIRPAGE.'admim-cadastrar-produto'}}" method="post" enctype="multipart/form-data" class="col-sm-6 offset-md-3 border ">
+          <form action="{{DIRPAGE.'admim-cadastrar-produto'}}" class="ml-0" method="post" enctype="multipart/form-data" class="col-sm-12 offset-md-3 border ">
                 <h1 class="display-5 mt-5 text-center font-weight-bold">Cadastrar produto</h1>
 
                     <div class="input-group mb-3">
@@ -28,7 +28,7 @@
                     </div>
 
                     <div class="for-group mt-5 mb-5">
-                    <textarea class="form-control" name="descricao" id="" cols="60" rows="5" placeholder="Descrição do produto"></textarea>
+                        <textarea class="form-control" name="descricao" id="" cols="60" rows="5" placeholder="Descrição do produto"></textarea>
                     </div>
                 
 
