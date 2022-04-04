@@ -94,13 +94,14 @@ class AdminController extends Produto{
 		if (count($_POST) > 0) {
 			if (!empty($_POST['nome'])) {
 				$nome = filter_input(INPUT_POST, 'nome', FILTER_DEFAULT);
+				$categoria::renomear($id, DIRREQ.'public/img/img/products/'.$categoria::getNameCategory($id)[0]->name_category, DIRREQ.'public/img/img/products/'.$nome);
 				$categoria->updateCategoria($nome, $id);
 				flash('edit_yes', '<b>Categoria editada com sucesso!</b>', 'alert alert-success');
 				redir("admin-categorias", false);
 			}else{
 				$erros = $this->erros;
 				array_push($erros, 'Preencha todos os campos');
-				return $this->blade->render('admin-categorias', compact('erros'));		
+				return $this->blade->render('admin/categoria', compact('erros'));		
 			}
 		}else{
 			$dados = Category::getCategoria($id);

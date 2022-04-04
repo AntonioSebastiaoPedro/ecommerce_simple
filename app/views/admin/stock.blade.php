@@ -4,13 +4,6 @@
 <h1 class="display-4 font-weight-bold text-center">STOCK</h1>
                     <hr>                      
 <div class="container">
-
-            
-<button class="btn btn-sm btn-primary" name="adicionar">
-                                        adicionar stock
-                                    </button>
-        
-
         
                 <table class="table table-bordered table-hover mt-5">
                     <thead>

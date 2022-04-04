@@ -15,7 +15,7 @@
                         <h5 class="display-5 mt-5 text-center font-weight-bold">Cadastro de categoria</h5>
                 @endif
                      <div class="for-group mt-5">
-                        <input class="form-control" type="text" value="{{$dados['name_category'] ?? ''}}" name="name" placeholder="Nome da categoria">
+                        <input class="form-control" type="text" value="{{$dados['name_category'] ?? ''}}" name="nome" placeholder="Nome da categoria">
                     </div>
         
                     <button type="submit" class="btn btn-success btn-block mt-5 mb-3" 

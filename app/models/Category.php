@@ -46,14 +46,27 @@ class Category extends Conexao{
 	
 
 	public function updateCategoria($nome, $id){
-		$query = "UPDATE categories SET nome=? WHERE id = ".$id;
+		$query = "UPDATE categories SET name_category=? WHERE id = ".$id;
 		$stmt = $this->setConn()->prepare($query);
 		$stmt->bindValue(1, $nome);
 		$stmt->execute();
+
+		if ($stmt->rowCount() > 0) {
+			return true;
+		}
+	}
+
+	public static function renomear($id, $old_caminho, $new_caminho){
+			
+		$query = "SELECT name_category FROM categories WHERE id = ".$id;
+			$stmt = self::setConn()->prepare($query);
+			$stmt->execute();
+
+			rename($old_caminho, $new_caminho);
 	}
 
 
-	public static function  getCategoria($id){
+	public static function getCategoria($id){
 		$query = "SELECT * FROM categories WHERE id = ".$id;
 		$stmt = self::setConn()->prepare($query);
 		$stmt->execute();
