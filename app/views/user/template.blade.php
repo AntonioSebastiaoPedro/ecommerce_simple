@@ -25,10 +25,16 @@
                 <li><a class="@yield('active3')" href="@php echo DIRPAGE.'sobre-nos' @endphp">Sobre nós</a></li>
                 <!--nav direita-->
                 <div class="barra-navegacao-direita">
-
-                <li id="lg-carrinho"><a href="@php echo DIRPAGE.'carrinho' @endphp" class="carrinho"><i class="far fa-shopping-bag"></i><i class="fa-solid fa-cart-shopping"></i>
-                    <span>0
-                    </span></a></li>
+                    @if(isset($_SESSION['type_user']))
+                        @if($_SESSION['type_user'] == 1)
+                            <li id="lg-carrinho"><a href="@php echo DIRPAGE.'carrinho' @endphp" class="carrinho"><i class="far fa-shopping-bag"></i><i class="fa-solid fa-cart-shopping"></i>
+                                <span>0
+                            </span></a></li>
+                         @endif
+                    @endif
+                            <li>
+                                <a href="@php echo DIRPAGE.'entrar' @endphp"><i class='fas fa-user-alt' style='font-size:28px;color:white'></i></a>
+                            </li>
                 
                 </div>
                 <!--nav direita fim-->

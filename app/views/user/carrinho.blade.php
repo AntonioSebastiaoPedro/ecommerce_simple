@@ -46,14 +46,14 @@
 
      <section id="cart-add" class="section-p1">
         <div id="cuopon">
-            <h3>Aplicar cupon</h3>
+            
             <div>
-                <input type="text" name="" id="" placeholder="Enter Your Coupon">
-                <button class="normal">Apply</button>
+                
+                
             </div>
         </div>
 
-        <div id="subtotal">
+        <div id="subtotal" style="float:left;">
             <h3>Total carrinho</h3>
             <table>
                 <tr>
