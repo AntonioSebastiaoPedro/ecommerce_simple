@@ -4,6 +4,7 @@ namespace App\Models;
 use PDO;
 
 class User extends Conexao{
+	public $erros = [];
 
 	public function getUsers(){
 		$query = "SELECT * FROM users";
@@ -34,24 +35,28 @@ class User extends Conexao{
 	}
 
 
-	public function addUser($nome, $email, $senha){
+	public static function addUser($nome, $email, $senha){
 
-		$user = $this->setConn()->prepare("SELECT * FROM users WHERE email = ".$email);
+		$query1 = "SELECT name_user FROM users WHERE id = ? ";
+		$user = self::setConn()->prepare($query1);
+		$user->bindValue(1, $email);
 		$user->execute();
 
 		if ($user->rowCount() > 0) {
+			array_push(self::$erros, "Já existe um usuário com este email");
 			return false;
-		}
-
-		$query = "INSERT INTO users(type_user, name_user, email, senha) VALUES(?,?,?,?)";
-		$stmt = $this->setConn()->prepare($query);
-		$stmt->bindValue(1, 1);
-		$stmt->bindValue(2, $nome);
-		$stmt->bindValue(3, $email);
-		$stmt->bindValue(4, $senha);
-		$stmt->execute();
+			die;
+		}else{
+			$query = "INSERT INTO users(type_user, name_user, email, senha) VALUES(?,?,?,?)";
+			$stmt = self::setConn()->prepare($query);
+			$stmt->bindValue(1, 1);
+			$stmt->bindValue(2, $nome);
+			$stmt->bindValue(3, $email);
+			$stmt->bindValue(4, $senha);
+			$stmt->execute();
 
 		return true;
+		}
 	}
 	
 

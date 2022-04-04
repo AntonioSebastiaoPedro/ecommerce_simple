@@ -118,12 +118,12 @@ class CarrinhoController extends Cart{
 		$order = new Order;
 		$order->cancelUserOrder($_SESSION['id_user']);
 		flash('add_yes', '<b>Encomenda cancelada com sucesso!</b>', 'alert alert-success');
-		$this->limparCarrinho();
+		$this->cart->clear();
 	}
 
 	public function limparCarrinho(){
 		$this->cart->clear();
-
+		flash('add_yes', '<b>Carrinho zerado com sucesso!</b>', 'alert alert-success');
 		return redir('carrinho', false);
 	}
 }

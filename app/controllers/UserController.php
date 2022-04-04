@@ -43,7 +43,6 @@ class UserController extends User{
 	}
 
 	public function entrar(){
-
         $user = $this->getUser($_POST['email'], $_POST['senha']);
         
 		if(empty($user)) {
@@ -70,19 +69,30 @@ class UserController extends User{
 
 	public function criarConta(){
 		if (isset($_POST['add'])) {
-			$nome = filter_input(INPUT_POST, 'nome', FILTER_DEFAULT);
-			$email = filter_input(INPUT_POST, 'email', FILTER_DEFAULT);
-			$senha = filter_input(INPUT_POST, 'senha', FILTER_DEFAULT);
+			if (!empty($_POST['nome'] AND $_POST['email'] AND $_POST['senha'])) {
+				$nome = filter_input(INPUT_POST, 'nome', FILTER_DEFAULT);
+				$email = filter_input(INPUT_POST, 'email', FILTER_DEFAULT);
+				$senha = filter_input(INPUT_POST, 'senha', FILTER_DEFAULT);
+				
+				if($this->addUser($nome, $email, $senha)){
+					$user = $this->getUser($email, $senha);
+					$_SESSION['id_user'] = $user[0]->id;
+					$_SESSION['email'] = $user[0]->email;
+					$_SESSION['type_user'] = $user[0]->type_user;
+					$_SESSION['name_user'] = $user[0]->name_user;
 
-			if($this->addUser($nome, $email, $senha)){
-				$user = $this->getUser($email, $senha);
-				$_SESSION['id_user'] = $user[0]->id;
-				$_SESSION['email'] = $user[0]->email;
-				$_SESSION['type_user'] = $user[0]->type_user;
-				$_SESSION['name_user'] = $user[0]->name_user;
-
-				$home = new HomeController;
-				$home->index();
+					$home = new HomeController;
+					$home->index();
+				}else{
+					$user = new User;
+					$erros = $user->erros;
+					array_push($erros, 'Preencha todos os campos');
+					return $this->blade->render('user/form-cadastro', compact('erros'));
+				}
+			}else{
+				$erros = $this->erros;
+				array_push($erros, 'Preencha todos os campos');
+				return $this->blade->render('user/form-cadastro', compact('erros'));
 			}
 		}else{
 			return $this->blade->render('user/form-cadastro');
