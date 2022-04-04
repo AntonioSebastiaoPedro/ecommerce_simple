@@ -41,8 +41,7 @@ class Order extends Conexao{
     
 
 	public static function getOrders(){
-		$query = "SELECT * FROM orders INNER JOIN products_order ON orders.id = products_order.id_encomenda
-				  INNER JOIN products ON products_order.id_produto = products.id";
+		$query = "SELECT * FROM orders";
 		$stmt = self::setConn()->prepare($query);
 		$stmt->execute();
         
@@ -60,8 +59,28 @@ class Order extends Conexao{
 		return $stmt->fetchAll(\PDO::FETCH_OBJ);
 	}
 
-	public static function cancelUserOrder(){
-		$query = "UPDATE orders SET status_entrega = ? WHERE id_user = ".$_SESSION['id_user'];
+	public static function adminCancelrOrder($id_encomenda){
+		$query = "UPDATE orders SET status_entrega = ? WHERE id = ". $id_encomenda;
+		$stmt = self::setConn()->prepare($query);
+		$stmt->bindValue(1, "Cancelado");
+		$stmt->execute();
+        if($stmt->rowCount() > 0){
+			return true;
+		}
+	}
+
+	public static function adminSaleOrder($id_encomenda){
+		$query = "UPDATE orders SET status_pago = ? WHERE id = ". $id_encomenda;
+		$stmt = self::setConn()->prepare($query);
+		$stmt->bindValue(1, "Pago");
+		$stmt->execute();
+        if($stmt->rowCount() > 0){
+			return true;
+		}
+	}
+	
+	public static function cancelUserOrder($id_user){
+		$query = "UPDATE orders SET status_entrega = ? WHERE id_user = ". $id_user;
 		$stmt = self::setConn()->prepare($query);
 		$stmt->bindValue(1, "Cancelado");
 		$stmt->execute();
@@ -98,6 +117,13 @@ class Order extends Conexao{
 		$stmt->execute();
 	}
 
+	public static function countOrders(){
+		$query = "SELECT * FROM products";
+		$stmt = self::setConn()->prepare($query);
+		$stmt->execute();
+
+		dd($dados = $stmt->rowCount());
+	}
 	
 
 

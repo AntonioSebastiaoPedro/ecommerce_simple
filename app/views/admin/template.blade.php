@@ -17,7 +17,6 @@
         {{redir('entrar', false)}}
     @endif
 
-
 <header>
 <div class="container-fluid">
     <div class="header-content">
@@ -36,6 +35,20 @@
         </div>
     </div>
 </div>
+@if (isset($erros))
+        @if(!empty($erros))
+            @foreach($erros as $erro)
+                <ul class="nav flex-column">
+                <li class="nav-item">
+                    <div class="alert alert-danger" role="alert">
+                        <b> {{$erro}} </b>
+                    </div>
+                </li>
+                </ul>
+            @endforeach
+        @endif
+    @endif
+    <center> @php echo flash('edit_yes'); echo flash('delete_yes'); echo flash('add_yes'); @endphp</center>
 </header>
 
 <div class="wrapper">

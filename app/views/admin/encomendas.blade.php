@@ -13,7 +13,7 @@
         <th scope="col">Status do Pagamento</th>
         <th scope="col">Tipo de Pagamento</th>
         <th scope="col">Nome do Usuário</th>
-        <th scope="col">Data de Criação<option value=""></option></th>
+        <th scope="col">Data de Criação</th>
         <th scope="col">Opções</th>
       </tr>
     </thead>
@@ -21,15 +21,15 @@
         @if(isset($orders))
           @foreach ($orders as $encomenda)
             <tr>
-                <th scope="row">{{$encomenda->id_encomenda}}</th>
+                <th scope="row">{{$encomenda->id}}</th>
                 <td>{{$encomenda->status_entrega}}</td>
                 <td>{{$encomenda->status_pago}}</td>
                 <td>{{$encomenda->tipo_pagamento}}</td>
                 <td>{{App\Models\User::getUserById($encomenda->id_user)['name_user']}}</td>
                 <td>{{date_format(date_create($encomenda->data_create),"d-m-Y H:i:s")}}</td>
                 <td>
-                    <button class="btn btn-warning"><a href="{{DIRPAGE.'pago'}}">Pago</a></button>
-                    <button class="btn btn-danger"><a href="{{DIRPAGE.'pago'}}">Cancelar</a></button>
+                    <button class="btn btn-success btn-sm mb-2"><a href="{{DIRPAGE.'admin-pago/'.$encomenda->id}}">Pago</a></button>
+                    <button class="btn btn-danger btn-sm"><a href="{{DIRPAGE.'admin-cancelar-encomenda/'.$encomenda->id}}">Cancelar</a></button>
                 </td>
             </tr>
             @endforeach

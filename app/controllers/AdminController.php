@@ -19,7 +19,9 @@ class AdminController extends Produto{
 
 	#index
 	public function index(){
-		return $this->blade->render('admin/index');
+		dd("");
+		dd(Order::countOrders());
+		//return $this->blade->render('admin/index');
 	}
 
 	public function cadastrarProduto()
@@ -146,17 +148,17 @@ class AdminController extends Produto{
 	}
 
 	public function encomendaPaga(){
-		if(is_null($orders = Order::getOrders())){
-			return $this->blade->render('admin/encomendas');
-		}
-		return $this->blade->render('admin/encomendas', compact('orders'));
+		$id = Rota::parseUrl()[1];
+		$order = Order::adminSaleOrder($id);
+		flash('add_yes', '<b>Encomenda cancelada com sucesso!</b>', 'alert alert-success');
+		return \redir("admin-encomendas", false);
 	}
 
-	public function encomendaPaga(){
-		if(is_null($orders = Order::getOrders())){
-			return $this->blade->render('admin/encomendas');
-		}
-		return $this->blade->render('admin/encomendas', compact('orders'));
+	public function encomendaCancelar(){
+		$id = Rota::parseUrl()[1];
+		$order = Order::adminCancelrOrder($id);
+		flash('add_yes', '<b>Encomenda Vendida com sucesso!</b>', 'alert alert-success');
+		return \redir("admin-encomendas", false);
 	}
 
 	public function sair(){

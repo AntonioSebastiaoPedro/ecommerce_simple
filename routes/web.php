@@ -33,3 +33,5 @@ $routes->getRoute('admim-cadastrar-produto', 'AdminController@cadastrarProduto')
 $routes->getRoute('admin-eliminar-produto', 'AdminController@delete');
 $routes->getRoute('admin-cadastrar-categoria', 'AdminController@cadastrarCategoria');
 $routes->getRoute('admin-encomendas', 'AdminController@encomendas');
+$routes->getRoute('admin-cancelar-encomenda', 'AdminController@encomendaCancelar');
+$routes->getRoute('admin-pago', 'AdminController@encomendaPaga');

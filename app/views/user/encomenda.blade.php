@@ -1,6 +1,8 @@
 @extends('user.template')
-
 @section('body')
+    @if($_SESSION['type_user'] != 1 or !isset($_SESSION['type_user']))
+        {{redir('entrar', false)}}
+    @endif
     <div class="jumbotron">
         <h1 class="display-4">Olá, {{$_SESSION['name_user']}}</h1>
         @if (isset($tipo_pagamento))

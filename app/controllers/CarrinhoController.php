@@ -116,7 +116,7 @@ class CarrinhoController extends Cart{
 
 	public function cancelEncomenda(){
 		$order = new Order;
-		$order->cancelUserOrder();
+		$order->cancelUserOrder($_SESSION['id_user']);
 		flash('add_yes', '<b>Encomenda cancelada com sucesso!</b>', 'alert alert-success');
 		$this->limparCarrinho();
 	}

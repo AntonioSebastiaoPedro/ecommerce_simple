@@ -1,7 +1,7 @@
 @extends('admin.template')
 
 @section('body')
-            <h1 class="display-4">bem vindo ao painel</h1>
+            <h1 class="display-4">Bem-Vindo ao painel</h1>
             <hr>
 
             <div class="row">
