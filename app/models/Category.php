@@ -1,6 +1,8 @@
 <?php
 namespace App\Models;
 
+use PDO;
+
 class Category extends Conexao{
 	public $erros = [];
 
@@ -16,16 +18,6 @@ class Category extends Conexao{
 	public static function getCategories(){
 		$query = "SELECT * FROM categories";
 		$stmt = self::setConn()->prepare($query);
-		$stmt->execute();
-
-		return $dados = $stmt->fetchAll(\PDO::FETCH_OBJ);
-	}
-
-
-	public function getProduto($id){
-		$query = "SELECT * FROM produtos WHERE id = ?";
-		$stmt = $this->setConn()->prepare($query);
-		$stmt->bindValue(1, $id);
 		$stmt->execute();
 
 		return $dados = $stmt->fetchAll(\PDO::FETCH_OBJ);
@@ -53,13 +45,20 @@ class Category extends Conexao{
 	}
 	
 
-	public function updateProduto($nome, $preco, $id){
-		$query = "UPDATE produtos SET nome=?, preco=? WHERE id = ?";
+	public function updateCategoria($nome, $id){
+		$query = "UPDATE categories SET nome=? WHERE id = ".$id;
 		$stmt = $this->setConn()->prepare($query);
 		$stmt->bindValue(1, $nome);
-		$stmt->bindValue(2, $preco);
-		$stmt->bindValue(3, $id);
 		$stmt->execute();
+	}
+
+
+	public static function  getCategoria($id){
+		$query = "SELECT * FROM categories WHERE id = ".$id;
+		$stmt = self::setConn()->prepare($query);
+		$stmt->execute();
+
+		return $stmt->fetch(PDO::FETCH_ASSOC);
 	}
 	
 

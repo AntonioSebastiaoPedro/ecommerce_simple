@@ -19,8 +19,7 @@ class AdminController extends Produto{
 
 	#index
 	public function index(){
-		dd("");
-		dd(Order::countOrders());
+
 		return $this->blade->render('admin/index');
 	}
 
@@ -33,14 +32,14 @@ class AdminController extends Produto{
 						mkdir($caminho);
 					}
 					$up_img = Upload::UpImg($caminho, $_FILES['img']);
-						$name_product = filter_input(INPUT_POST, 'name_product', FILTER_SANITIZE_STRING);
+						$name_product = filter_input(INPUT_POST, 'name_product', FILTER_DEFAULT);
 						$price_unit = filter_input(INPUT_POST, 'price_unit', FILTER_SANITIZE_NUMBER_INT);
 						$preco_de_compra =  filter_input(INPUT_POST, 'preco_de_compra', FILTER_SANITIZE_NUMBER_INT);
 						$quantidade =  filter_input(INPUT_POST, 'quantidade', FILTER_SANITIZE_NUMBER_INT);
 						$id_category =  filter_input(INPUT_POST, 'categoria', FILTER_SANITIZE_NUMBER_INT);
 						$id_user = $_SESSION['id_user'];
 						$img = $_FILES['img']['name'];
-						$details = filter_input(INPUT_POST, 'descricao', FILTER_SANITIZE_STRING);
+						$details = filter_input(INPUT_POST, 'descricao', FILTER_DEFAULT);
 						
 						$id = $this->addProduto($name_product, $price_unit, $preco_de_compra, $quantidade, $id_category, $id_user, $img, $details);
 
@@ -89,24 +88,23 @@ class AdminController extends Produto{
 	
 
 
-	public function edit(){
+	public function editarCategoria(){
 		$id = isset(Rota::parseUrl()[1]) ? Rota::parseUrl()[1] : null;
+		$categoria = new Category;
 		if (count($_POST) > 0) {
-			if (!empty($_POST['nome'] or $_POST['preco'])) {
+			if (!empty($_POST['nome'])) {
 				$nome = filter_input(INPUT_POST, 'nome', FILTER_DEFAULT);
-				$preco = filter_input(INPUT_POST, 'preco', FILTER_DEFAULT);
-				$this->updateProduto($nome, $preco, $id);
-				flash('edit_yes', '<b>Actualização feita com sucesso!</b>', 'alert alert-success');
-				redir("produto", false);
+				$categoria->updateCategoria($nome, $id);
+				flash('edit_yes', '<b>Categoria editada com sucesso!</b>', 'alert alert-success');
+				redir("admin-categorias", false);
 			}else{
 				$erros = $this->erros;
 				array_push($erros, 'Preencha todos os campos');
-				return $this->blade->render('addProduto', compact('erros'));		
+				return $this->blade->render('admin-categorias', compact('erros'));		
 			}
-
 		}else{
-			$dados = $this->getProduto($id)[0];
-			return $this->blade->render('addProduto', compact('dados'));		
+			$dados = Category::getCategoria($id);
+			return $this->blade->render('admin/categoria', compact('dados'));		
 		}
 	}
 

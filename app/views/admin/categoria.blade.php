@@ -7,22 +7,22 @@
                     <hr>                      
             <div class="container">
 
-
-                
-                <form action="{{DIRPAGE.'admin-cadastrar-categoria'}}" method="post" class="col-sm-6 offset-md-3 border">
-                <h5 class="display-5 mt-5 text-center font-weight-bold">Cadastro de categoria</h5>
-
+                @if (isset($dados))
+                    <form action="{{DIRPAGE.'admin-editar-categoria/'.$dados['id']}}" method="post" class="col-sm-6 offset-md-3 border">
+                        <h5 class="display-5 mt-5 text-center font-weight-bold">Editar de Categoria</h5>
+                @else
+                    <form action="{{DIRPAGE.'admin-cadastrar-categoria'}}" method="post" class="col-sm-6 offset-md-3 border">
+                        <h5 class="display-5 mt-5 text-center font-weight-bold">Cadastro de categoria</h5>
+                @endif
                      <div class="for-group mt-5">
-                        <input class="form-control" type="text" name="name" placeholder="Nome da categoria">
+                        <input class="form-control" type="text" value="{{$dados['name_category'] ?? ''}}" name="name" placeholder="Nome da categoria">
                     </div>
         
                     <button type="submit" class="btn btn-success btn-block mt-5 mb-3" 
                     name="btn">
-                        Cadastrar
+                        {{$nome = (isset($dados)) ? "Actualizar" : "Cadastrar"}}
                     </button>
                 </form>
-        
-        
                 <table class="table table-light mt-5">
                     <thead>
                         <tr>
@@ -41,7 +41,7 @@
                             <td>{{$categoria->name_category}}</td>
                             <td>{{$categoria->data_create}}</td>
                             <td>
-                                <a href="{{DIRPAGE.'admin-editar-categoria'}}"><button class="btn btn-md btn-warning">
+                                <a href="{{DIRPAGE.'admin-editar-categoria/'.$categoria->id}}"><button class="btn btn-md btn-warning">
                                     Editar
                                 </button></a>
                             </td>

@@ -28,8 +28,8 @@
                 <td>{{App\Models\User::getUserById($encomenda->id_user)['name_user']}}</td>
                 <td>{{date_format(date_create($encomenda->data_create),"d-m-Y H:i:s")}}</td>
                 <td>
-                    <button class="btn btn-success btn-sm mb-2"><a href="{{DIRPAGE.'admin-pago/'.$encomenda->id}}">Pago</a></button>
-                    <button class="btn btn-danger btn-sm"><a href="{{DIRPAGE.'admin-cancelar-encomenda/'.$encomenda->id}}">Cancelar</a></button>
+                  <a href="{{DIRPAGE.'admin-pago/'.$encomenda->id}}"><button class="btn btn-success btn-sm mb-2">Pago</button>
+                    <a href="{{DIRPAGE.'admin-cancelar-encomenda/'.$encomenda->id}}"><button class="btn btn-danger btn-sm">Cancelar</button></a>
                 </td>
             </tr>
             @endforeach
