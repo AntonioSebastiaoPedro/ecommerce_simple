@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
     <link rel="shortcut icon" href="@php echo DIRIMG.'img/logotipo.png' @endphp">
     @yield('css')
+    <link rel="stylesheet" href="@php echo DIRBSCSS.'bootstrap.css' @endphp">
     <link rel="stylesheet" href="@php echo DIRCSS.'style.css' @endphp">
 </head>
 
@@ -55,8 +56,8 @@
                 </ul>
             @endforeach
         @endif
-
     @endif
+    <center> @php echo flash('edit_yes'); echo flash('delete_yes'); echo flash('add_yes'); @endphp</center>
     @yield('body')
 
 
@@ -100,8 +101,9 @@
         <div class="col">
             <h4>Minha conta</h4>
             <a href="{{DIRPAGE.'entrar'}}">Iniciar Sessão</a>
-            <a href="{{DIRPAGE.'carrinho'}}">Ver carrinho</a>
             @if(isset($_SESSION['type_user']))
+                <a href="{{DIRPAGE.'carrinho'}}">Ver carrinho</a>
+                <a href="{{DIRPAGE.'encomenda'}}">Ver Encomendas</a>
                 <a href="{{DIRPAGE.'sair'}}">Sair</a>
             @endif
         </div>

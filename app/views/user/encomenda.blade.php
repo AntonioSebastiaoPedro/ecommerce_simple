@@ -1,9 +1,65 @@
 @extends('user.template')
+
 @section('body')
     <div class="jumbotron">
-        <h1 class="display-4">Olá, mundo!</h1>
-        <p class="lead">Este é um simples componente jumbotron para chamar mais atenção a um determinado conteúdo ou informação.</p>
+        <h1 class="display-4">Olá, {{$_SESSION['name_user']}}</h1>
+        <p class="lead">A sua encomenda está em processamento, por favor aguarde em sua localização para entrega.</p>
         <hr class="my-4">
-        <p>Ele usa classes utilitárias para tipografia e espaçamento de conteúdo, dentro do maior container.</p>
+        @if (isset($tipo_pagamento) AND $tipo_pagamento == "Tranferência")
+        <b><p>Se Ainda Não o Fez, Envie o Compravativo da Transferência Para o Nosso Whatsapp .</p></b>
+        @endif
+    </div>
+
+    <div class="container">
+        <table class="table">
+            <h4>Informações dos Produtos</h4>
+            <thead>
+              <tr>
+                <th scope="col">Produtos</th>
+                <th scope="col">Preço</th>
+                <th scope="col">Quantidade</th>
+                <th scope="col">Subtotal</th>
+                <th scope="col">14% de IVA</th>
+                <th scope="col">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+                  @foreach ($encomenda as $encomenda)
+                  <tr>
+                    <th scope="row">{{$encomenda->name_product}}</th>
+                    <td>{{number_format($encomenda->price_unit, 2, ',', '.')}} kz</td>
+                    <td>{{$encomenda->quant}}</td>
+                    <td>{{number_format($encomenda->subtotal, 2, ',', '.')}} kz</td>
+                    <td>{{number_format($encomenda->subtotal * 14/100, 2, ',', '.')}} kz</td>
+                    <td>{{number_format($encomenda->subtotal + 14/100 * $encomenda->subtotal, 2, ',', '.')}} kz</td>
+                  </tr>
+                  @endforeach
+                
+            </tbody>
+          </table>
+          <hr width="3">
+          <table class="table">
+              <h4>Informações da Encomenda</h4>
+            <tbody>
+                  <tr>
+                    <th scope="row">Total</td>
+                    <td>{{number_format($encomenda->total, 2, ',', '.')}} kz</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Tipo de Pagamento</td>
+                    <td>{{$encomenda->tipo_pagamento}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Status da Entrega</td>
+                    <td>{{$encomenda->status_entrega}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Status de Pagamento</td>
+                    <td>{{$encomenda->status_pago}}</td>
+                  </tr>
+                
+            </tbody>
+          </table>
+          <button class="btn btn-danger btn-block">Cancelar Encomenda</button>
     </div>
 @endsection

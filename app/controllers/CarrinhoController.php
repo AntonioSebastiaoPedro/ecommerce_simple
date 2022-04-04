@@ -50,7 +50,7 @@ class CarrinhoController extends Cart{
 			'subtotal'   => $produto[0]->quatity * $produto[0]->price_unit
 		]);
 
-		flash('delete_yes', '<b>Produto adicionado ao carrinho com sucesso!</b>', 'alert alert-success');
+		flash('add_yes', '<b>Produto adicionado ao carrinho com sucesso!</b>', 'alert alert-success');
 		return redir('loja', false);
 		
 	}
@@ -63,6 +63,8 @@ class CarrinhoController extends Cart{
 		}
 
 		$this->cart->remove($id);
+
+		flash('delete_yes', '<b>Produto removido ao carrinho com sucesso!</b>', 'alert alert-success');
 
 		return $this->index();
 	}
@@ -96,11 +98,20 @@ class CarrinhoController extends Cart{
 				$encomenda->addProductsOrder($item['id'], $item['quantity'], $subtotal);
 			}
 		}
-		dd($encomenda);
+		$this->cart->clear();
+		flash('add_yes', '<b>Encomenda feita com sucesso!</b>', 'alert alert-success');
+		return redir('encomenda', false);
 	}
 
 	public function encomenda(){
+		$order = new Order;
+		$encomenda = $order::getUserOrders();
+
+		$tipo_pagamento = ($order::getUserOrders()[0]->tipo_pagamento == "Tranferência") ? "Tranferência" : "Na Entrega";
 		
+		return $this->blade->render('user/encomenda', compact('encomenda', 'tipo_pagamento'));
+
+
 	}
 
 	public function limparCarrinho(){
