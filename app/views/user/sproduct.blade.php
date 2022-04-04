@@ -25,7 +25,7 @@
             <h2>{{$produto->price_unit}}</h2>
 
             <input type="number" value="1">
-            <button class="normal">Add Carrinho</button>
+            <a href="{{DIRPAGE.'add-carrinho/'.$produto->id}}"><button class="normal">Adicionar no Carrinho</button></a>
             <h4>Detalhes do Produto</h4>
             <span>{{$produto->details}}</span>
         </div>
