@@ -2,7 +2,7 @@
 namespace App\Controllers;
 
 use App\Controllers\RoutesController as Rota;
-use App\Models\Produto;
+use App\Models\Order;
 use App\Controllers\HomeController;
 use App\Models\User;
 use \Jenssegers\Blade\Blade;
@@ -94,14 +94,9 @@ class UserController extends User{
 		return $this->index();
 	}
 
-	public function finalizar(){
-		$iva = $_POST['iva'];
-		$subtotal = $_POST['subtotal'];
-		$total = $_POST['total'];
-		$cart = $this->cart;
-		$allItems = $this->cart->getItems();
 
-		return $this->blade->render('user/checkout', compact('allItems', 'cart', 'iva', 'subtotal', 'total'));		
+	public function about(){
+		return $this->blade->render('/user/about');
 	}
 
 	public function sair(){

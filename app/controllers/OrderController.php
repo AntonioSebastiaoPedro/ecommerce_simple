@@ -29,20 +29,10 @@ class AboutController extends Produto{
 
 	public function add(){
 		if (count($_POST) > 0) {
-			if (!empty($_POST['nome'] or $_POST['preco'])) {
-				$nome = filter_input(INPUT_POST, 'nome', FILTER_DEFAULT);
-				$preco = filter_input(INPUT_POST, 'preco', FILTER_DEFAULT);
-				$this->addProduto($nome, $preco);
-				flash('add_yes', '<b>Produto cadastrado com sucesso!</b>', 'alert alert-success');
-				redir("addProduto", false);
-			}else{
-				$erros = $this->erros;
-				array_push($erros, 'Preencha todos os campos');
-				return $this->blade->render('addProduto', compact('erros'));		
-			}
-
+			dd('');
 		}else{
-			return $this->blade->render('addProduto');		
+			
+			//return $this->blade->render('addProduto');		
 		}
 	}
 	

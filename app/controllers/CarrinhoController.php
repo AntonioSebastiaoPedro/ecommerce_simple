@@ -4,6 +4,7 @@ namespace App\Controllers;
 use App\Controllers\RoutesController as Rota;
 use App\Models\Produto;
 use App\Models\Category;
+use App\Models\Order;
 use \Jenssegers\Blade\Blade;
 use Src\Classes\Cart;
 
@@ -74,6 +75,32 @@ class CarrinhoController extends Cart{
 		$allItems = $this->cart->getItems();
 
 		return $this->blade->render('user/checkout', compact('allItems', 'cart', 'iva', 'subtotal', 'total'));		
+	}
+
+	public function checkout(){
+		$allItems = $this->cart->getItems();
+		$total = $this->cart->getAttributeTotal('price_unit') + $this->cart->getAttributeTotal('price_unit')*14/100;
+
+		$nome = filter_input(INPUT_POST, 'nome', FILTER_DEFAULT);
+		$email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+		$numero = filter_input(INPUT_POST, 'numero', FILTER_SANITIZE_NUMBER_INT);
+		$morada = filter_input(INPUT_POST, 'morada', FILTER_DEFAULT);
+		$pagamento = filter_input(INPUT_POST, 'pagamento', FILTER_DEFAULT);
+
+		$encomenda = new Order;
+		$encomenda->addEncomenda($_SESSION['id_user'], $morada, $total, "Por Entregar", "Por Pagar", $pagamento);
+
+		foreach ($allItems as $items) {
+			foreach ($items as $item) {
+				$subtotal = $item['attributes']['price_unit'] * $item['quantity'];
+				$encomenda->addProductsOrder($item['id'], $item['quantity'], $subtotal);
+			}
+		}
+		dd($encomenda);
+	}
+
+	public function encomenda(){
+		
 	}
 
 	public function limparCarrinho(){

@@ -6,12 +6,13 @@ $routes->getRoute('produto', 'ProdutoController@produtoSingle');
 $routes->getRoute('editProduto', 'ProdutoController@edit');
 $routes->getRoute('deleteProduto', 'ProdutoController@delete');
 
-$routes->getRoute('sobre-nos', 'AboutController@index');
+$routes->getRoute('sobre-nos', 'UserController@about');
 
 $routes->getRoute('carrinho', 'CarrinhoController@index');
 $routes->getRoute('add-carrinho', 'CarrinhoController@addProduto');
 $routes->getRoute('remove-carrinho', 'CarrinhoController@removeProduto');
 $routes->getRoute('finalizar-compra', 'CarrinhoController@finalizar');
+$routes->getRoute('checkout', 'CarrinhoController@checkout');
 $routes->getRoute('limpar-carrinho', 'CarrinhoController@limparCarrinho');
 
 $routes->getRoute('entrar', 'UserController@index');
