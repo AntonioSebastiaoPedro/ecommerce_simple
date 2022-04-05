@@ -35,4 +35,5 @@ $routes->getRoute('admin-cadastrar-categoria', 'AdminController@cadastrarCategor
 $routes->getRoute('admin-editar-categoria', 'AdminController@editarCategoria');
 $routes->getRoute('admin-encomendas', 'AdminController@encomendas');
 $routes->getRoute('admin-cancelar-encomenda', 'AdminController@encomendaCancelar');
+$routes->getRoute('admin-entregue', 'AdminController@entregue');
 $routes->getRoute('admin-pago', 'AdminController@encomendaPaga');

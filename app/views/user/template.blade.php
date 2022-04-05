@@ -27,8 +27,9 @@
                 <div class="barra-navegacao-direita">
                     @if(isset($_SESSION['type_user']))
                         @if($_SESSION['type_user'] == 1)
+                        @php $carrinho = new App\Controllers\CarrinhoController; @endphp
                             <li id="lg-carrinho"><a href="@php echo DIRPAGE.'carrinho' @endphp" class="carrinho"><i class="far fa-shopping-bag"></i><i class="fa-solid fa-cart-shopping"></i>
-                                <span>0
+                                <span>{{$carrinho->cart->getTotalItem()}}
                             </span></a></li>
                          @endif
                     @endif

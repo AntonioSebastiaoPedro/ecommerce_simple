@@ -21,7 +21,8 @@
 
                             <th>Lucro</th>
         
-                            <th>Operações</th>
+                            <th>Data de Cadastro</th>
+                            <th>Opcões</th>
 
                         
                     </thead>
@@ -35,8 +36,8 @@
                             <td>{{number_format($produto->preco_de_compra), 2, ',', '.'}} kz</td>
                             <td>{{number_format($produto->price_unit), 2, ',', '.'}} kz</td>
                             <td>{{number_format($produto->price_unit-$produto->preco_de_compra), 2, ',', '.'}} kz</td>
+                            <td> {{$produto->date_create}} </td>
                             <td>
-                                <a href="#"><button class="btn btn-sm btn-primary">Editar</button></a>
                                 <a href="{{DIRPAGE.'admin-eliminar-produto/'.$produto->id}}"><button class="btn btn-sm btn-danger">Eliminar</button></a>
                             </td>
                         </tr>
