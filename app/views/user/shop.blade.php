@@ -27,7 +27,7 @@
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
-                    <h4>{{number_format($produto->price_unit, '2', ',', '.')}}</h4>
+                    <h4>{{number_format($produto->price_unit, '2', ',', '.')}} kz</h4>
                 </div>
                 <a href="{{DIRPAGE.'add-carrinho/'.$produto->id}}"><i class="fal fa-shopping-cart cart"></i></a>
                 </a>

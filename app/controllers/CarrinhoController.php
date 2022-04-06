@@ -104,14 +104,15 @@ class CarrinhoController extends Cart{
 	}
 
 	public function encomenda(){
-		$order = new Order;
-		if(empty($encomenda = $order::getUserOrders())){
+		$encomendas = Order::getUserOrders();
+		if(empty($encomendas = Order::getUserOrders())){
 			return $this->blade->render('user/encomenda');
 		}
 
-		$tipo_pagamento = ($order::getUserOrders()[0]->tipo_pagamento == "Tranferência") ? "Tranferência" : "Na Entrega";
+		$numero_encomendas = Order::countUserOrders();
+		$tipo_pagamento = (Order::getUserOrders()[0]->tipo_pagamento == "Tranferência") ? "Tranferência" : "Na Entrega";
 		
-		return $this->blade->render('user/encomenda', compact('encomenda', 'tipo_pagamento'));
+		return $this->blade->render('user/encomenda', compact('encomendas', 'tipo_pagamento', 'numero_encomendas'));
 	}
 
 	public function cancelEncomenda(){

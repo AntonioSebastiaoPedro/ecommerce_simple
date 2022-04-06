@@ -99,6 +99,7 @@ class UserController extends User{
 		}
 	}
 
+	
 	public function removeProduto()
 	{
 		$id = isset(Rota::parseUrl()[1]) ? Rota::parseUrl()[1] : null;

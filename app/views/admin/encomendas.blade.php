@@ -20,6 +20,7 @@
     <tbody>
         @if(isset($orders))
           @foreach ($orders as $encomenda)
+          
             <tr>
                 <th scope="row">{{$encomenda->id}}</th>
                 <td>{{$encomenda->status_entrega}}</td>
@@ -28,7 +29,8 @@
                 <td>{{App\Models\User::getUserById($encomenda->id_user)['name_user']}}</td>
                 <td>{{date_format(date_create($encomenda->data_create),"d-m-Y H:i:s")}}</td>
                 <td>
-                  <a href="{{DIRPAGE.'admin-pago/'.$encomenda->id}}"><button class="btn btn-success btn-sm mb-2">Pago</button>
+                  <a href="{{DIRPAGE.'admin-pago/'.$encomenda->id}}"><button class="btn btn-success btn-sm mb-2">Pago</button></a>
+                  <a href="{{DIRPAGE.'admin-entregue/'.$encomenda->id.'/'.$encomenda->id_user}}"><button class="btn btn-success btn-sm mb-2">Entregue</button></a>
                     <a href="{{DIRPAGE.'admin-cancelar-encomenda/'.$encomenda->id}}"><button class="btn btn-danger btn-sm">Cancelar</button></a>
                 </td>
             </tr>

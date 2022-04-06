@@ -59,6 +59,15 @@ class Order extends Conexao{
 		return $stmt->fetchAll(\PDO::FETCH_OBJ);
 	}
 
+	public static function countUserOrders(){
+		$query = "SELECT * FROM orders WHERE id_user = {$_SESSION['id_user']} AND status_entrega = ?";
+		$stmt = self::setConn()->prepare($query);
+		$stmt->bindValue(1, "Por Entregar");
+		$stmt->execute();
+
+		return $dados = $stmt->rowCount();
+	}
+
 	public static function adminCancelrOrder($id_encomenda){
 		$query = "UPDATE orders SET status_entrega = ? WHERE id = ". $id_encomenda;
 		$stmt = self::setConn()->prepare($query);
@@ -68,6 +77,34 @@ class Order extends Conexao{
 			return true;
 		}
 	}
+
+	public static function adminSale($id_encomenda, $id_user){
+
+		$query1 = "INSERT INTO sales(id_encomenda, id_user) VALUES(?,?)";
+		$stmt1 = self::setConn()->prepare($query1);
+		$stmt1->bindValue(1, $id_encomenda);
+		$stmt1->bindValue(2, $id_user);
+		
+		dd($stmt1->execute());
+
+		$query2 = "UPDATE products SET status_pago = ? WHERE id = ". $id_encomenda;
+		$stmt2 = self::setConn()->prepare($query2);
+		$stmt2->bindValue(1, $id_encomenda);
+		$stmt2->bindValue(2, $id_user);
+
+		if($stmt1->rowCount() > 0){
+			return true;
+		}
+
+		$query = "UPDATE orders SET status_pago = ? WHERE id = ". $id_encomenda;
+		$stmt = self::setConn()->prepare($query);
+		$stmt->bindValue(1, "Pago");
+		$stmt->execute();
+        if($stmt->rowCount() > 0){
+			return true;
+		}
+	}
+	
 
 	public static function adminSaleOrder($id_encomenda){
 		$query = "UPDATE orders SET status_pago = ? WHERE id = ". $id_encomenda;
@@ -86,26 +123,6 @@ class Order extends Conexao{
 		$stmt->execute();
         
 		return true;
-	}
-
-
-	public function getProduto($id){
-		$query = "SELECT * FROM produtos WHERE id = ?";
-		$stmt = $this->setConn()->prepare($query);
-		$stmt->bindValue(1, $id);
-		$stmt->execute();
-
-		return $dados = $stmt->fetchAll(\PDO::FETCH_OBJ);
-	}
-	
-
-	public function updateProduto($nome, $preco, $id){
-		$query = "UPDATE produtos SET nome=?, preco=? WHERE id = ?";
-		$stmt = $this->setConn()->prepare($query);
-		$stmt->bindValue(1, $nome);
-		$stmt->bindValue(2, $preco);
-		$stmt->bindValue(3, $id);
-		$stmt->execute();
 	}
 	
 

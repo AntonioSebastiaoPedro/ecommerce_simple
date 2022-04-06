@@ -172,9 +172,9 @@
                               <label class="input-group-text" for="inputGroupSelect01">Opções</label>
                             </div>
                             <select name="pagamento" class="custom-select" id="inputGroupSelect01">
-                              <option selected>Tipo de Pagemnto.</option>
+                              <option selected>Tipo de Pagamento.</option>
                               <option value="Na Entrega">Pagamento na Entrega</option>
-                              <option value="Tranferência">Paganento por Transferência</option>
+                              <option value="Tranferência">Pagamento por Transferência</option>
                             </select>
                           </div>
 

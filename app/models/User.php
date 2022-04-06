@@ -45,7 +45,6 @@ class User extends Conexao{
 		if ($user->rowCount() > 0) {
 			array_push(self::$erros, "Já existe um usuário com este email");
 			return false;
-			die;
 		}else{
 			$query = "INSERT INTO users(type_user, name_user, email, senha) VALUES(?,?,?,?)";
 			$stmt = self::setConn()->prepare($query);

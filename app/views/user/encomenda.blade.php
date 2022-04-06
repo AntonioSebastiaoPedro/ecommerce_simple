@@ -14,6 +14,7 @@
     </div>
 
     <div class="container">
+      @for ($i = 1; $i <= $numero_encomendas; $i++)
         <table class="table">
             <h4>Informações dos Produtos</h4>
             <thead>
@@ -27,7 +28,7 @@
               </tr>
             </thead>
             <tbody>
-                  @foreach ($encomenda as $encomenda)
+              @foreach ($encomendas as $encomenda)
                   <tr>
                     <th scope="row">{{$encomenda->name_product}}</th>
                     <td>{{number_format($encomenda->price_unit, 2, ',', '.')}} kz</td>
@@ -36,8 +37,8 @@
                     <td>{{number_format($encomenda->subtotal * 14/100, 2, ',', '.')}} kz</td>
                     <td>{{number_format($encomenda->subtotal + 14/100 * $encomenda->subtotal, 2, ',', '.')}} kz</td>
                   </tr>
-                  @endforeach
-                
+                  
+                @endforeach
             </tbody>
           </table>
           <hr width="3">
@@ -64,6 +65,7 @@
             </tbody>
           </table>
           <a href="{{DIRPAGE.'cancelar-encomenda'}}"><button class="btn btn-danger btn-block">Cancelar Encomenda</button></a>
+          @endfor
         @else
         <div class="alert alert-primary" role="alert">
             <h4 class="alert-heading">Sem Encomendas</h4>
