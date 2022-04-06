@@ -19,11 +19,10 @@ $routes->getRoute('cancelar-encomenda', 'CarrinhoController@cancelEncomenda');
 
 $routes->getRoute('entrar', 'UserController@index');
 $routes->getRoute('login', 'UserController@entrar');
-$routes->getRoute('admin', 'UserController@admin');
 $routes->getRoute('sair', 'UserController@sair');
 $routes->getRoute('criar-conta', 'UserController@criarConta');
 
-
+$routes->getRoute('admin', 'AdminController@index');
 $routes->getRoute('admin-sair', 'AdminController@sair');
 $routes->getRoute('admin-produtos', 'AdminController@produtos');
 $routes->getRoute('admin-categorias', 'AdminController@categorias');

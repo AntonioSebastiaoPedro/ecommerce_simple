@@ -19,7 +19,7 @@
                             
                             <th>Preço de Venda</th>
 
-                            <th>Lucro</th>
+                            <th>Lucro por Venda</th>
         
                             <th>Data de Cadastro</th>
                             <th>Opcões</th>

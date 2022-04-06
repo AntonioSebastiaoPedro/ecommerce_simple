@@ -9,6 +9,7 @@ use Src\Classes\Upload;
 use \App\Controllers\ProdutoController;
 use App\Models\Order;
 use App\Models\Sale;
+use App\Models\User;
 
 class AdminController extends Produto{
 	private $blade;
@@ -20,8 +21,13 @@ class AdminController extends Produto{
 
 	#index
 	public function index(){
-
-		return $this->blade->render('admin/index');
+		$encomendas = Order::countOrders();
+		$caterorias = Category::countCategories();
+		$produtos = Produto::countProducts();
+		$stock = Produto::countStock();
+		$users = User::countUsers();
+		$sales = Sale::countSales();
+		return $this->blade->render('admin/index', compact('encomendas', 'caterorias', 'produtos', 'stock', 'users', 'sales'));
 	}
 
 	public function cadastrarProduto()

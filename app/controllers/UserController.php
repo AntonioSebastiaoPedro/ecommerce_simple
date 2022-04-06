@@ -33,14 +33,6 @@ class UserController extends User{
 		return $this->blade->render('user/form-login');
 	}
 
-    public function admin(){
-		$encomendas = Order::countOrders();
-		$caterorias = Category::countCategories();
-		$produtos = Produto::countProducts();
-		$stock = Produto::countStock();
-		$users = User::countUsers();
-		return $this->blade->render('admin/index', compact('encomendas', 'caterorias', 'produtos', 'stock', 'users'));
-	}
 
 	public function entrar(){
         $user = $this->getUser($_POST['email'], $_POST['senha']);
