@@ -23,20 +23,21 @@
                 <li><a class="@yield('active1')" href="@php echo DIRPAGE @endphp">Home</a></li>
                 <li><a class="@yield('active2')" href="@php echo DIRPAGE.'loja' @endphp">Loja</a></li>
                 <li><a class="@yield('active3')" href="@php echo DIRPAGE.'sobre-nos' @endphp">Sobre nós</a></li>
+                @if(isset($_SESSION['type_user']))
+                        <li>
+                            <a href="{{DIRPAGE.'sair'}}">Sair</a>
+                        </li>
+                @endif
                 <!--nav direita-->
                 <div class="barra-navegacao-direita">
-                    @if(isset($_SESSION['type_user']))
-                        @if($_SESSION['type_user'] == 1)
                         @php $carrinho = new App\Controllers\CarrinhoController; @endphp
                             <li id="lg-carrinho"><a href="@php echo DIRPAGE.'carrinho' @endphp" class="carrinho"><i class="far fa-shopping-bag"></i><i class="fa-solid fa-cart-shopping"></i>
                                 <span>{{$carrinho->cart->getTotalItem()}}
                             </span></a></li>
-                         @endif
-                    @endif
                             <li>
-                                <a href="@php echo DIRPAGE.'entrar' @endphp"><i class='fas fa-user-alt' style='font-size:28px;color:white'></i></a>
+                                <a href="{{DIRPAGE.'encomenda'}}"><i class='fas fa-user-alt' style='font-size:28px;color:white'></i></a>
                             </li>
-                
+                    
                 </div>
                 <!--nav direita fim-->
                 <a href="#" id="fechar"><i class="far fa-times"></i></a>
@@ -111,7 +112,6 @@
             @if(isset($_SESSION['type_user']))
                 <a href="{{DIRPAGE.'carrinho'}}">Ver carrinho</a>
                 <a href="{{DIRPAGE.'encomenda'}}">Ver Encomendas</a>
-                <a href="{{DIRPAGE.'sair'}}">Sair</a>
             @endif
         </div>
 
