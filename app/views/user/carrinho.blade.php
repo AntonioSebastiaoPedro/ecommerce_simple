@@ -36,6 +36,7 @@
                         <td>{{$produto['attributes']['name_product']}}</td>
                         <td>{{number_format($produto['attributes']['price_unit'], 2, ',', '.')}} Akz</td>
                         <td><input type="number" value="{{$produto['quantity']}}" name="quantity" id=""></td>
+                        <td><strong>{{number_format($produto['attributes']['price_unit'] * $produto['quantity'], 2, ',', '.')}} Akz</strong></td>
                         <td></td>
                     </tr>
                     @endforeach
