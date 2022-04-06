@@ -32,7 +32,7 @@
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
-                    <h4>{{$produto->price_unit}}</h4>
+                    <h4>{{number_format($produto->price_unit, '2', ',', '.')}} kz</h4>
                 </div>
                 <a href="{{DIRPAGE.'add-carrinho/'.$produto->id}}"><i class="fal fa-shopping-cart cart"></i></a>
             </a>
@@ -66,7 +66,7 @@
                 <div class="des">
                     <span> {{App\Models\Category::getNameCategory($produto->id_category)[0]->name_category}} </span>
                     <h5>{{$produto->name_product}}</h5>
-                    <h4>{{number_format($produto->price_unit, '2', ',', '.')}}</h4>
+                    <h4>{{number_format($produto->price_unit, '2', ',', '.')}} kz</h4>
                 </div>
                 <a href="{{DIRPAGE.'add-carrinho/'.$produto->id}}"><i class="fal fa-shopping-cart cart"></i></a>
             </a>

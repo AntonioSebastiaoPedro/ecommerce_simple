@@ -22,7 +22,7 @@
         <div class="single-pro-details">
             <h6>{{App\Models\Category::getNameCategory($produto->id_category)[0]->name_category}}</h6>
             <h4>{{$produto->name_product}}</h4>
-            <h2>{{$produto->price_unit}}</h2>
+            <h2>{{number_format($produto->price_unit, '2', ',', '.')}} kz</h2>
 
             <input type="number" value="1">
             <a href="{{DIRPAGE.'add-carrinho/'.$produto->id}}"><button class="normal">Adicionar no Carrinho</button></a>
@@ -50,9 +50,9 @@
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
-                    <h4>{{$produto->price_unit}}</h4>
+                    <h4>{{number_format($produto->price_unit, '2', ',', '.')}} kz</h4>
                 </div>
-                <a href="#"><i class="fal fa-shopping-cart cart"></i></a>
+                <a href="{{DIRPAGE.'add-carrinho/'.$produto->id}}"><i class="fal fa-shopping-cart cart"></i></a>
             </a>
             </div>
         @endforeach            
