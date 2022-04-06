@@ -27,6 +27,9 @@
                         <li>
                             <a href="{{DIRPAGE.'sair'}}">Sair</a>
                         </li>
+                        <li>
+                            <a href="{{DIRPAGE.'encomenda'}}"><i class='fas fa-user-alt' style='font-size:28px;color:white'></i></a>
+                        </li>
                 @endif
                 <!--nav direita-->
                 <div class="barra-navegacao-direita">
@@ -34,10 +37,6 @@
                             <li id="lg-carrinho"><a href="@php echo DIRPAGE.'carrinho' @endphp" class="carrinho"><i class="far fa-shopping-bag"></i><i class="fa-solid fa-cart-shopping"></i>
                                 <span>{{$carrinho->cart->getTotalItem()}}
                             </span></a></li>
-                            <li>
-                                <a href="{{DIRPAGE.'encomenda'}}"><i class='fas fa-user-alt' style='font-size:28px;color:white'></i></a>
-                            </li>
-                    
                 </div>
                 <!--nav direita fim-->
                 <a href="#" id="fechar"><i class="far fa-times"></i></a>
