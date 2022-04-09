@@ -89,8 +89,8 @@ class Order extends Conexao{
 		}
 	}
 	
-	public static function cancelUserOrder($id_user){
-		$query = "UPDATE orders SET status_entrega = ? WHERE id_user = ". $id_user;
+	public static function cancelUserOrder($id_encomenda){
+		$query = "UPDATE orders SET status_entrega = ? WHERE id = {$id_encomenda}";
 		$stmt = self::setConn()->prepare($query);
 		$stmt->bindValue(1, "Cancelado");
 		$stmt->execute();

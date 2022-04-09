@@ -64,7 +64,7 @@
                 
             </tbody>
           </table>
-          <a href="{{DIRPAGE.'cancelar-encomenda'}}"><button class="btn btn-danger btn-block">Cancelar Encomenda</button></a>
+          <a href="{{DIRPAGE.'cancelar-encomenda/'.$encomenda->id_encomenda}}"><button class="btn btn-danger btn-block">Cancelar Encomenda</button></a>
           @endfor
         @else
         <div class="alert alert-primary" role="alert">

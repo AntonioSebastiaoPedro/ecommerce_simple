@@ -114,10 +114,13 @@ class CarrinhoController extends Cart{
 	}
 
 	public function cancelEncomenda(){
+		$id = Rota::parseUrl()[1];
 		$order = new Order;
-		$order->cancelUserOrder($_SESSION['id_user']);
+		$order->cancelUserOrder($id);
 		flash('add_yes', '<b>Encomenda cancelada com sucesso!</b>', 'alert alert-success');
 		$this->cart->clear();
+
+		return $this->encomenda();
 	}
 
 	public function limparCarrinho(){
