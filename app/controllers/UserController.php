@@ -92,15 +92,12 @@ class UserController extends User{
 	}
 
 	
-	public function removeProduto()
-	{
+	public function removeProduto(){
 		$id = isset(Rota::parseUrl()[1]) ? Rota::parseUrl()[1] : null;
 		if($id == null) {
 			return $this->index();
 		}
-
 		$this->cart->remove($id);
-
 		return $this->index();
 	}
 
@@ -111,7 +108,6 @@ class UserController extends User{
 
 	public function sair(){
 		session_destroy();
-
 		return redir('entrar', false);
 	}
 

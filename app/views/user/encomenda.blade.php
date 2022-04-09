@@ -3,18 +3,16 @@
     @if($_SESSION['type_user'] != 1 or !isset($_SESSION['type_user']))
         {{redir('entrar', false)}}
     @endif
+    @if(isset($encomendas))
     <div class="jumbotron">
         <h1 class="display-4">Olá, {{$_SESSION['name_user']}}</h1>
-        @if (isset($tipo_pagamento))
           <p class="lead">A sua encomenda está em processamento, por favor aguarde em sua localização para entrega.</p>
           <hr class="my-4">
-          @if ($tipo_pagamento == "Tranferência")
-            <b><p>Se Ainda Não o Fez, Envie o Compravativo da Transferência Para o Nosso Whatsapp .</p></b>
-          @endif
+            <b><p>Caso pretenda pagar por transferência, e Ainda Não o Fez, Envie o Compravativo da Transferência Para o Nosso Whatsapp .</p></b>
     </div>
 
     <div class="container">
-      @for ($i = 1; $i <= $numero_encomendas; $i++)
+      @foreach ($encomendas as $encomenda)
         <table class="table">
             <h4>Informações dos Produtos</h4>
             <thead>
@@ -28,17 +26,16 @@
               </tr>
             </thead>
             <tbody>
-              @foreach ($encomendas as $encomenda)
+              @foreach(App\Models\Order::getProductsOfOrder($encomenda->id) as $produto)
                   <tr>
-                    <th scope="row">{{$encomenda->name_product}}</th>
-                    <td>{{number_format($encomenda->price_unit, 2, ',', '.')}} kz</td>
-                    <td>{{$encomenda->quant}}</td>
-                    <td>{{number_format($encomenda->subtotal, 2, ',', '.')}} kz</td>
-                    <td>{{number_format($encomenda->subtotal * 14/100, 2, ',', '.')}} kz</td>
-                    <td>{{number_format($encomenda->subtotal + 14/100 * $encomenda->subtotal, 2, ',', '.')}} kz</td>
+                    <th scope="row">{{$produto->name_product}}</th>
+                    <td>{{number_format($produto->price_unit, 2, ',', '.')}} kz</td>
+                    <td>{{$produto->quant}}</td>
+                    <td>{{number_format($produto->subtotal, 2, ',', '.')}} kz</td>
+                    <td>{{number_format($produto->subtotal * 14/100, 2, ',', '.')}} kz</td>
+                    <td>{{number_format($produto->subtotal + 14/100 * $produto->subtotal, 2, ',', '.')}} kz</td>
                   </tr>
-                  
-                @endforeach
+              @endforeach
             </tbody>
           </table>
           <hr width="3">
@@ -64,13 +61,14 @@
                 
             </tbody>
           </table>
-          <a href="{{DIRPAGE.'cancelar-encomenda/'.$encomenda->id_encomenda}}"><button class="btn btn-danger btn-block">Cancelar Encomenda</button></a>
-          @endfor
-        @else
+          <a href="{{DIRPAGE.'admin-entregue/'.$encomenda->id.'/'.$_SESSION['id_user']}}"><button class="btn btn-success btn-block mb-2">Encomenda Entregue</button></a>
+          <a href="{{DIRPAGE.'cancelar-encomenda/'.$encomenda->id}}"><button class="btn btn-danger btn-block">Cancelar Encomenda</button></a><br><br><hr>
+          @endforeach
+  @else
         <div class="alert alert-primary" role="alert">
             <h4 class="alert-heading">Sem Encomendas</h4>
             <p>Você Não Tem Nenhum Encomenda Pendente.</p>
           </div>
-        @endif
+  @endif
     </div>
 @endsection

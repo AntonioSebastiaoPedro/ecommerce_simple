@@ -49,13 +49,23 @@ class Order extends Conexao{
 	}
 
     public static function getUserOrders(){
-		$query = "SELECT * FROM orders INNER JOIN products_order ON orders.id = products_order.id_encomenda
-				  INNER JOIN products ON products_order.id_produto = products.id
-				  WHERE orders.id_user = {$_SESSION['id_user']} AND orders.status_entrega = ?";
+		$query = "SELECT * FROM orders
+				  WHERE id_user = {$_SESSION['id_user']} AND status_entrega = ?";
 		$stmt = self::setConn()->prepare($query);
 		$stmt->bindValue(1, 'Por Entregar');
 		$stmt->execute();
         
+		return $stmt->fetchAll(\PDO::FETCH_OBJ);
+	}
+
+
+	public static function getProductsOfOrder($id_encomenda){
+		$query = "SELECT * FROM products INNER JOIN products_order ON products.id = products_order.id_produto
+                   WHERE products_order.id_encomenda = {$id_encomenda}";
+		$stmt = self::setConn()->prepare($query);
+		$stmt->bindValue(1, 'Por Entregar');
+        $stmt->execute();
+
 		return $stmt->fetchAll(\PDO::FETCH_OBJ);
 	}
 
