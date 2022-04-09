@@ -88,7 +88,7 @@ class Produto extends Conexao{
 					return true;
 				}
 		}else{
-			$query = "UPDATE products SET name_product = ?, price_unit = ?, preco_de_compra = ?, quantidade = ?, id_user = ?, img = ?, details = ?)
+			$query = "UPDATE products SET name_product = ?, price_unit = ?, preco_de_compra = ?, quantidade = ?, id_user = ?, img = ?, details = ?
 						WHERE id = {$id_produto}";
 			$stmt = $this->setConn()->prepare($query);
 			$stmt->bindValue(1, $name_product);
@@ -107,9 +107,9 @@ class Produto extends Conexao{
 	}
 
 
-	public function updateOthersImgs($idProduto, $imgs){
+	/*public function updateOthersImgs($idProduto, $imgs){
 		foreach ($imgs as $img) {
-			$query = "UPDATE others_imgs (idProduct, img) Values(?,?) WHERE idProduct = {$idProduto}";
+			$query = "UPDATE others_imgs SET idProduct=?, img=? WHERE idProduct = {$idProduto}";
 			$stmt = $this->setConn()->prepare($query);
 			$stmt->bindValue(1, $idProduto);
 			$stmt->bindValue(2, $img);
@@ -119,10 +119,11 @@ class Produto extends Conexao{
 		if ($stmt->rowCount() > 0) {
 			return true;
 		}
-	}
+	}*/
 
 
 	public function addOthersImgs($idProduto, $imgs){
+		$this->setConn()->prepare("DELETE FROM others_imgs WHERE idProduct = {$idProduto}")->execute();
 		foreach ($imgs as $img) {
 			$query = "INSERT INTO others_imgs (idProduct, img) Values(?,?)";
 			$stmt = $this->setConn()->prepare($query);

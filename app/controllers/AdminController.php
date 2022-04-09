@@ -107,11 +107,11 @@ class AdminController extends Produto{
 			
 			if(isset($_FILES['outras_imgs'])){
 				$outras_imgs = Upload::UpOthersImgs($caminho, $_FILES['outras_imgs']);
-				$this->updateOthersImgs($id, $_FILES['outras_imgs']['name']);
+				$this->addOthersImgs($idProduto, $_FILES['outras_imgs']['name']);
 			}
 
 			flash('add_yes', '<b>Produto actualizado com sucesso!</b>', 'alert alert-success');
-			return redir('admin-produtos', false);
+			return redir('admin-stock', false);
 		}else{
 			$produto = $product->getProduto($id);
 			$categorias = Category::getCategories();
