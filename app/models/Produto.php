@@ -23,6 +23,27 @@ class Produto extends Conexao{
 		return $dados = $stmt->fetchAll(\PDO::FETCH_OBJ);
 	}
 
+	public static function getImg($idProduto){
+		$stmt = self::setConn()->prepare("SELECT img FROM products WHERE id = {$idProduto}");
+		$stmt->execute();
+
+		return $stmt->fetch(\PDO::FETCH_ASSOC)['img'];
+	}
+
+	public static function getName($idProduto){
+		$stmt = self::setConn()->prepare("SELECT name_product FROM products WHERE id = {$idProduto}");
+		$stmt->execute();
+
+		return $stmt->fetch(\PDO::FETCH_ASSOC)['name_product'];
+	}
+
+	public static function getOthersImg($idProduto){
+		$stmt = self::setConn()->prepare("SELECT img FROM others_imgs WHERE idProduct = {$idProduto}");
+		$stmt->execute();
+
+		return $stmt->fetchAll(\PDO::FETCH_OBJ);
+	}
+
 
 	public function addProduto($name_product, $price_unit, $preco_de_compra, $quantidade, $id_category, $id_user, $img, $details){
 
@@ -49,6 +70,58 @@ class Produto extends Conexao{
 		}
 	}
 
+
+	public function updateProduto($name_product, $price_unit, $preco_de_compra, $quantidade, $id_user, $img, $details, $id_produto){
+		if ($img == null) {
+			$query = "UPDATE products SET name_product = ?, price_unit = ?, preco_de_compra = ?, quantidade = ?, id_user = ?, details = ?
+						WHERE id = {$id_produto}";
+				$stmt = $this->setConn()->prepare($query);
+				$stmt->bindValue(1, $name_product);
+				$stmt->bindValue(2, $price_unit);
+				$stmt->bindValue(3, $preco_de_compra);
+				$stmt->bindValue(4, $quantidade);
+				$stmt->bindValue(5, $id_user);
+				$stmt->bindValue(6, $details);
+				$stmt->execute();
+
+				if ($stmt->rowCount() > 0) {
+					return true;
+				}
+		}else{
+			$query = "UPDATE products SET name_product = ?, price_unit = ?, preco_de_compra = ?, quantidade = ?, id_user = ?, img = ?, details = ?)
+						WHERE id = {$id_produto}";
+			$stmt = $this->setConn()->prepare($query);
+			$stmt->bindValue(1, $name_product);
+			$stmt->bindValue(2, $price_unit);
+			$stmt->bindValue(3, $preco_de_compra);
+			$stmt->bindValue(4, $quantidade);
+			$stmt->bindValue(5, $id_user);
+			$stmt->bindValue(6, $img);
+			$stmt->bindValue(7, $details);
+			$stmt->execute();
+
+			if ($stmt->rowCount() > 0) {
+				return true;
+			}
+		}
+	}
+
+
+	public function updateOthersImgs($idProduto, $imgs){
+		foreach ($imgs as $img) {
+			$query = "UPDATE others_imgs (idProduct, img) Values(?,?) WHERE idProduct = {$idProduto}";
+			$stmt = $this->setConn()->prepare($query);
+			$stmt->bindValue(1, $idProduto);
+			$stmt->bindValue(2, $img);
+			$stmt->execute();
+		}
+
+		if ($stmt->rowCount() > 0) {
+			return true;
+		}
+	}
+
+
 	public function addOthersImgs($idProduto, $imgs){
 		foreach ($imgs as $img) {
 			$query = "INSERT INTO others_imgs (idProduct, img) Values(?,?)";
@@ -57,16 +130,9 @@ class Produto extends Conexao{
 			$stmt->bindValue(2, $img);
 			$stmt->execute();
 		}
-	}
-	
-
-	public function updateProduto($nome, $preco, $id){
-		$query = "UPDATE produtos SET nome=?, preco=? WHERE id = ?";
-		$stmt = $this->setConn()->prepare($query);
-		$stmt->bindValue(1, $nome);
-		$stmt->bindValue(2, $preco);
-		$stmt->bindValue(3, $id);
-		$stmt->execute();
+		if ($stmt->rowCount() > 0) {
+			return true;
+		}
 	}
 	
 
@@ -77,6 +143,15 @@ class Produto extends Conexao{
 		$stmt->bindValue(1, $id);
 		$stmt->execute();
 		$this->setConn()->prepare("DELETE FROM others_imgs WHERE idProduct = ".$id)->execute();
+	}
+
+	public static function deleteOthersImgs($id){
+		$stmt = self::setConn()->prepare("DELETE FROM others_imgs WHERE idProduct = ".$id);
+		$stmt->execute();
+
+		if ($stmt->rowCount() > 0) {
+			return true;
+		}
 	}
 
 

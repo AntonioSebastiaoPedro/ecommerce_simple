@@ -63,6 +63,64 @@ class AdminController extends Produto{
 	}
 
 
+	public function editarProduto()
+	{
+		$product = new Produto;
+		$id = isset(Rota::parseUrl()[1]) ? Rota::parseUrl()[1] : null;
+		if (count($_POST) > 0) {
+
+			$idProduto = $_POST['id'];
+			
+			$name_product = filter_input(INPUT_POST, 'name_product', FILTER_DEFAULT);
+			$price_unit = filter_input(INPUT_POST, 'price_unit', FILTER_SANITIZE_NUMBER_INT);
+			$preco_de_compra =  filter_input(INPUT_POST, 'preco_de_compra', FILTER_SANITIZE_NUMBER_INT);
+			$quantidade =  filter_input(INPUT_POST, 'quantidade', FILTER_SANITIZE_NUMBER_INT);
+			$id_category =  filter_input(INPUT_POST, 'categoria', FILTER_SANITIZE_NUMBER_INT);
+			$id_user = $_SESSION['id_user'];
+			$img = $_FILES['img']['name'];
+			$details = filter_input(INPUT_POST, 'descricao', FILTER_DEFAULT);
+
+			$old_img = Produto::getImg($idProduto);
+			$old_imgs = Produto::getOthersImg($idProduto);
+			$old_name = Produto::getName($idProduto);
+			$caminho = DIRREQ.'public/img/img/products/'.Category::getNameCategory($id_category)[0]->name_category.'/'.$name_product.'/';
+			$old_caminho = DIRREQ.'public/img/img/products/'.Category::getNameCategory($id_category)[0]->name_category.'/'.$old_name.'/';
+			if ($old_name != $name_product) {
+				if (!is_dir($caminho)) {
+					mkdir($caminho);
+				}
+				foreach($old_imgs as $imagem){
+					copy($old_caminho.$imagem->img, $caminho.$imagem->img);
+				}
+				copy($old_caminho.$old_img, $caminho.$old_img);
+
+				delTree($old_caminho);
+
+			}
+
+			if (isset($_FILES['img']) and !empty($_FILES['img']['name'])) {
+				$up_img = Upload::UpImg($caminho, $_FILES['img']);
+					$this->updateProduto($name_product, $price_unit, $preco_de_compra, $quantidade, $id_user, $img, $details, $idProduto);
+			}else{
+				$this->updateProduto($name_product, $price_unit, $preco_de_compra, $quantidade, $id_user, null, $details, $idProduto);
+			}
+			
+			if(isset($_FILES['outras_imgs'])){
+				$outras_imgs = Upload::UpOthersImgs($caminho, $_FILES['outras_imgs']);
+				$this->updateOthersImgs($id, $_FILES['outras_imgs']['name']);
+			}
+
+			flash('add_yes', '<b>Produto actualizado com sucesso!</b>', 'alert alert-success');
+			return redir('admin-produtos', false);
+		}else{
+			$produto = $product->getProduto($id);
+			$categorias = Category::getCategories();
+			return $this->blade->render('admin/produtos', compact('produto', 'categorias'));
+
+		}
+	}
+
+
 	public function cadastrarCategoria(){
 		if (count($_POST) > 0) {
 			if (!empty($_POST['name'])) {

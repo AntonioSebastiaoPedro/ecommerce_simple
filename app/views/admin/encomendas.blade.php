@@ -12,7 +12,7 @@
         <th scope="col">Status da Encomenda</th>
         <th scope="col">Status do Pagamento</th>
         <th scope="col">Tipo de Pagamento</th>
-        <th scope="col">Nome do Usuário</th>
+        <th scope="col">Nome do Cliente</th>
         <th scope="col">Data de Criação</th>
         <th scope="col">Opções</th>
       </tr>

@@ -38,6 +38,7 @@
                             <td>{{number_format($produto->price_unit-$produto->preco_de_compra), 2, ',', '.'}} kz</td>
                             <td> {{$produto->date_create}} </td>
                             <td>
+                                <a href="{{DIRPAGE.'admin-editar-produto/'.$produto->id}}"><button class="btn btn-sm btn-warning mb-1">Editar</button></a>
                                 <a href="{{DIRPAGE.'admin-eliminar-produto/'.$produto->id}}"><button class="btn btn-sm btn-danger">Eliminar</button></a>
                             </td>
                         </tr>
