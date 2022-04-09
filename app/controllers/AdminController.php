@@ -228,7 +228,7 @@ class AdminController extends Produto{
 	public function encomendaCancelar(){
 		$id = Rota::parseUrl()[1];
 		$order = Order::adminCancelrOrder($id);
-		flash('add_yes', '<b>Encomenda Vendida com sucesso!</b>', 'alert alert-success');
+		flash('add_yes', '<b>Encomenda Cancelada com sucesso!</b>', 'alert alert-success');
 		return \redir("admin-encomendas", false);
 	}
 

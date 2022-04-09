@@ -38,29 +38,6 @@ class ProdutoController extends Produto{
 		}
 
 	}
-	
-
-
-	public function edit(){
-		$id = isset(Rota::parseUrl()[1]) ? Rota::parseUrl()[1] : null;
-		if (count($_POST) > 0) {
-			if (!empty($_POST['nome'] or $_POST['preco'])) {
-				$nome = filter_input(INPUT_POST, 'nome', FILTER_DEFAULT);
-				$preco = filter_input(INPUT_POST, 'preco', FILTER_DEFAULT);
-				$this->updateProduto($nome, $preco, $id);
-				flash('edit_yes', '<b>Actualização feita com sucesso!</b>', 'alert alert-success');
-				redir("produto", false);
-			}else{
-				$erros = $this->erros;
-				array_push($erros, 'Preencha todos os campos');
-				return $this->blade->render('addProduto', compact('erros'));		
-			}
-
-		}else{
-			$dados = $this->getProduto($id)[0];
-			return $this->blade->render('addProduto', compact('dados'));		
-		}
-	}
 
 
 	public function delete(){

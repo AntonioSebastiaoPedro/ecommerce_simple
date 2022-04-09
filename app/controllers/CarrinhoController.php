@@ -27,8 +27,6 @@ class CarrinhoController extends Cart{
 	public function index(){
 		$cart = $this->cart;
 
-		//dd($cart->getAttributeTotal('price_unit'));
-
 		$allItems = $this->cart->getItems();
 		return $this->blade->render('user/carrinho', compact('allItems', 'cart'));
 	}
