@@ -45,15 +45,6 @@ class Sale extends Conexao{
 		return $dados = $stmt->rowCount();
 	}
 	
-
-
-	public static function countOrders(){
-		$query = "SELECT * FROM orders";
-		$stmt = self::setConn()->prepare($query);
-		$stmt->execute();
-
-		return $dados = $stmt->rowCount();
-	}
 	
 
 

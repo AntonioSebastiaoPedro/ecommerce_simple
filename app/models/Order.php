@@ -99,14 +99,6 @@ class Order extends Conexao{
 	}
 	
 
-
-	public function deleteCategory($id){
-		$query = "DELETE FROM categories WHERE id = ?";
-		$stmt = $this->setConn()->prepare($query);
-		$stmt->bindValue(1, $id);
-		$stmt->execute();
-	}
-
 	public static function countOrders(){
 		$query = "SELECT * FROM orders";
 		$stmt = self::setConn()->prepare($query);

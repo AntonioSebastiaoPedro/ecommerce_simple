@@ -107,20 +107,6 @@ class Produto extends Conexao{
 	}
 
 
-	/*public function updateOthersImgs($idProduto, $imgs){
-		foreach ($imgs as $img) {
-			$query = "UPDATE others_imgs SET idProduct=?, img=? WHERE idProduct = {$idProduto}";
-			$stmt = $this->setConn()->prepare($query);
-			$stmt->bindValue(1, $idProduto);
-			$stmt->bindValue(2, $img);
-			$stmt->execute();
-		}
-
-		if ($stmt->rowCount() > 0) {
-			return true;
-		}
-	}*/
-
 
 	public function addOthersImgs($idProduto, $imgs){
 		$this->setConn()->prepare("DELETE FROM others_imgs WHERE idProduct = {$idProduto}")->execute();

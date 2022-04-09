@@ -78,30 +78,6 @@ class User extends Conexao{
 	}
 
 
-	public static function getMaisVendidos(){
-		$query = "SELECT * FROM users ORDER BY sales DESC LIMIT 4";
-		$stmt = self::setConn()->prepare($query);
-		$stmt->execute();
-
-		return $dados = $stmt->fetchAll(\PDO::FETCH_OBJ);
-	}
-
-	public static function getMaisRecentes(){
-		$query = "SELECT * FROM users ORDER BY date_create DESC LIMIT 4";
-		$stmt = self::setConn()->prepare($query);
-		$stmt->execute();
-
-		return $dados = $stmt->fetchAll(\PDO::FETCH_OBJ);
-	}
-
-	public static function getOutrasFotos($idUser){
-		$query = "SELECT others_imgs.img FROM others_imgs INNER JOIN users ON others_imgs.idProduct = users.id WHERE users.id = ?";
-		$stmt = self::setConn()->prepare($query);
-		$stmt->bindValue(1, $idUser);
-		$stmt->execute();
-
-		return $dados = $stmt->fetchAll(\PDO::FETCH_OBJ);
-	}
 
 	public static function countUsers(){
 		$query = "SELECT * FROM users";
