@@ -26,7 +26,7 @@
                 <td>{{App\Models\User::getUserById($venda->id_user)['name_user']}}</td>
                 <td>{{date_format(date_create($venda->data_create),"d-m-Y H:i:s")}}</td>
                 <td>
-                  <a href="{{DIRPAGE.'admin-detalhes-venda/'.$venda->id}}"><button class="btn btn-primary btn-sm mb-2">Ver Detalhes</button></a>
+                  <a href="{{DIRPAGE.'admin-detalhes-venda/'.$venda->id.'/'.$venda->id_encomenda}}"><button class="btn btn-primary btn-sm mb-2">Ver Detalhes</button></a>
                 </td>
             </tr>
             @endforeach

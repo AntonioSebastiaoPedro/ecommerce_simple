@@ -58,12 +58,20 @@ class Order extends Conexao{
 		return $stmt->fetchAll(\PDO::FETCH_OBJ);
 	}
 
+	public static function getOrder($id_encomenda){
+		$query = "SELECT * FROM orders
+				  WHERE id = {$id_encomenda}";
+		$stmt = self::setConn()->prepare($query);
+		$stmt->execute();
+        
+		return $stmt->fetch(\PDO::FETCH_OBJ);
+	}
+
 
 	public static function getProductsOfOrder($id_encomenda){
 		$query = "SELECT * FROM products INNER JOIN products_order ON products.id = products_order.id_produto
                    WHERE products_order.id_encomenda = {$id_encomenda}";
 		$stmt = self::setConn()->prepare($query);
-		$stmt->bindValue(1, 'Por Entregar');
         $stmt->execute();
 
 		return $stmt->fetchAll(\PDO::FETCH_OBJ);

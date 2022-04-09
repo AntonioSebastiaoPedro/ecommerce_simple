@@ -1,20 +1,9 @@
-@extends('user.template')
+@extends('admin.template')
 @section('body')
-    @if($_SESSION['type_user'] != 1 or !isset($_SESSION['type_user']))
-        {{redir('entrar', false)}}
-    @endif
-    <div class="jumbotron">
-      <h1 class="display-4">Olá, {{$_SESSION['name_user']}}</h1>
-    @if(isset($encomendas))
-    <p class="lead">A sua encomenda está em processamento, por favor aguarde em sua localização para entrega.</p>
-        <hr class="my-4">
-      </div>
-            <b><p>Caso pretenda pagar por transferência, e Ainda Não o Fez, Envie o Compravativo da Transferência Para o Nosso Whatsapp .</p></b>
-
+<h3 style="text-align: center;margin-bottom:40px">Detalhes da Venda</h3>
     <div class="container">
-      @foreach ($encomendas as $encomenda)
         <table class="table">
-            <h4>Informações dos Produtos</h4>
+            <h4>Informações dos Produtos Vendidos</h4>
             <thead>
               <tr>
                 <th scope="col">Produtos</th>
@@ -26,7 +15,7 @@
               </tr>
             </thead>
             <tbody>
-              @foreach(App\Models\Order::getProductsOfOrder($encomenda->id) as $produto)
+              @foreach($details as $produto)
                   <tr>
                     <th scope="row">{{$produto->name_product}}</th>
                     <td>{{number_format($produto->price_unit, 2, ',', '.')}} kz</td>
@@ -40,10 +29,15 @@
           </table>
           <hr width="3">
           <table class="table">
-              <h4>Informações da Encomenda</h4>
+              <h4>Informações da Venda</h4>
             <tbody>
+                    <tr>
+                    <th scope="row">ID da Venda</td>
+                    <td>{{$id_venda}}</td>
+                  </tr>
                   <tr>
-                    <th scope="row">Total</td>
+                  <tr>
+                    <th scope="row">Total Pago</td>
                     <td>{{number_format($encomenda->total, 2, ',', '.')}} kz</td>
                   </tr>
                   <tr>
@@ -55,20 +49,15 @@
                     <td>{{$encomenda->status_entrega}}</td>
                   </tr>
                   <tr>
-                    <th scope="row">Status de Pagamento</td>
-                    <td>{{$encomenda->status_pago}}</td>
+                    <th scope="row">Data da venda</td>
+                    <td>{{date_format(date_create($encomenda->data_create),"d-m-Y H:i:s")}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Cliente</td>
+                    <td>{{App\Models\User::getUserById($encomenda->id_user)['name_user']}}</td>
                   </tr>
                 
             </tbody>
           </table>
-          <a href="{{DIRPAGE.'admin-entregue/'.$encomenda->id.'/'.$_SESSION['id_user']}}"><button class="btn btn-success btn-block mb-2">Encomenda Entregue</button></a>
-          <a href="{{DIRPAGE.'cancelar-encomenda/'.$encomenda->id}}"><button class="btn btn-danger btn-block">Cancelar Encomenda</button></a><br><br><hr>
-          @endforeach
-  @else
-        <div class="alert alert-primary" role="alert">
-            <h4 class="alert-heading">Sem Encomendas</h4>
-            <p class="text-danger">Você Não Tem Nenhum Encomenda Pendente.</p>
-          </div>
-  @endif
     </div>
 @endsection
