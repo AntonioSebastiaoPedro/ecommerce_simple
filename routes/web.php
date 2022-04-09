@@ -26,6 +26,7 @@ $routes->getRoute('admin', 'AdminController@index');
 $routes->getRoute('admin-sair', 'AdminController@sair');
 $routes->getRoute('admin-produtos', 'AdminController@produtos');
 $routes->getRoute('admin-categorias', 'AdminController@categorias');
+$routes->getRoute('admin-vendas', 'AdminController@vendas');
 $routes->getRoute('admin-stock', 'AdminController@stock');
 $routes->getRoute('admin-users', 'AdminController@users');
 $routes->getRoute('admim-cadastrar-produto', 'AdminController@cadastrarProduto');

@@ -41,7 +41,7 @@ class Order extends Conexao{
     
 
 	public static function getOrders(){
-		$query = "SELECT * FROM orders";
+		$query = "SELECT * FROM orders WHERE NOT status_entrega = 'Entregue'";
 		$stmt = self::setConn()->prepare($query);
 		$stmt->execute();
         

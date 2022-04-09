@@ -37,6 +37,15 @@ class Sale extends Conexao{
 	}
 
 
+	public static function getSales(){
+		$query = "SELECT * FROM orders INNER JOIN sales ON orders.id = sales.id_encomenda";
+		$stmt = self::setConn()->prepare($query);
+		$stmt->execute();
+        
+		return $stmt->fetchAll(\PDO::FETCH_OBJ);
+	}
+
+
     public static function countSales(){
 		$query = "SELECT * FROM sales";
 		$stmt = self::setConn()->prepare($query);
