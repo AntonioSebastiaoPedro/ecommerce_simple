@@ -219,10 +219,11 @@ class AdminController extends Produto{
 
 	public function detalhesVenda(){
 		$id_venda = Rota::parseUrl()[1];
+		$sale = Sale::getSale($id_venda);
 		$id_encomenda = Rota::parseUrl()[2];
 		$encomenda = Order::getOrder($id_encomenda);
 		$details = Sale::getDetails($id_encomenda);
-		return $this->blade->render('admin/detalhes-venda', compact('encomenda', 'details', 'id_venda'));
+		return $this->blade->render('admin/detalhes-venda', compact('encomenda', 'details', 'id_venda', 'sale'));
 	}
 
 	public function encomendaPaga(){

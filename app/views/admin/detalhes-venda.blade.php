@@ -50,7 +50,7 @@
                   </tr>
                   <tr>
                     <th scope="row">Data da venda</td>
-                    <td>{{date_format(date_create($encomenda->data_create),"d-m-Y H:i:s")}}</td>
+                    <td>{{date_format(date_create($sale->data_create),"d-m-Y H:i:s")}}</td>
                   </tr>
                   <tr>
                     <th scope="row">Cliente</td>
