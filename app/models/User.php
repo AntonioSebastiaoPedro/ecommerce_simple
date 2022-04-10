@@ -6,12 +6,12 @@ use PDO;
 class User extends Conexao{
 	public $erros = [];
 
-	public function getUsers(){
+	public static function getUsers(){
 		$query = "SELECT * FROM users";
-		$stmt = $this->setConn()->prepare($query);
+		$stmt = self::setConn()->prepare($query);
 		$stmt->execute();
 
-		return $dados = $stmt->fetchAll(\PDO::FETCH_OBJ);
+		return $stmt->fetchAll(\PDO::FETCH_OBJ);
 	}
 
 

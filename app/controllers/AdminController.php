@@ -200,7 +200,8 @@ class AdminController extends Produto{
 	}
 
 	public function users(){
-		return $this->blade->render('admin/users');
+		$users = User::getUsers();
+		return $this->blade->render('admin/users', compact('users'));
 	}
 
 	public function encomendas(){
