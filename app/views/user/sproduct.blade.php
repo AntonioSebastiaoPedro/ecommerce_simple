@@ -20,14 +20,16 @@
         </div>
 
         <div class="single-pro-details">
-            <h6>{{App\Models\Category::getNameCategory($produto->id_category)[0]->name_category}}</h6>
-            <h4>{{$produto->name_product}}</h4>
-            <h2>{{number_format($produto->price_unit, '2', ',', '.')}} kz</h2>
+            <form action="" method="post">
+                <h6>{{App\Models\Category::getNameCategory($produto->id_category)[0]->name_category}}</h6>
+                <h4>{{$produto->name_product}}</h4>
+                <h2>{{number_format($produto->price_unit, '2', ',', '.')}} kz</h2>
 
-            <input type="number" value="1">
-            <a href="{{DIRPAGE.'add-carrinho/'.$produto->id}}"><button class="normal">Adicionar no Carrinho</button></a>
-            <h4>Detalhes do Produto</h4>
-            <span>{{$produto->details}}</span>
+                <input type="number" value="1" name="quantidade">
+                <a href="{{DIRPAGE.'add-carrinho/'.$produto->id}}"><button class="normal">Adicionar no Carrinho</button></a>
+                <h4>Detalhes do Produto</h4>
+                <span>{{$produto->details}}</span>
+            </form>
         </div>
     @endforeach
     </section>

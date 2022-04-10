@@ -57,10 +57,10 @@
 
             <li><a href="{{DIRPAGE.'admin'}}"><i class="fa-solid fa-gauge-high"></i> <span class="text-link"> PAINEL DO ADMIN </span></a></li>
             <li><a href="{{DIRPAGE.'admin-vendas'}}"><i class="fa-solid fa-gauge-high"></i> <span class="text-link"> VENDAS </span></a></li>
-            <li><a href="{{DIRPAGE.'admin-produtos'}}"><i class="fa-solid fa-clipboard-list"></i> <span class="text-link">CADASTRAR PRODUTO</span></a></li>
-            <li><a href="{{DIRPAGE.'admin-categorias'}}"><i class="fa-solid fa-plus"></i> <span class="text-link">CATEGORIAS</span></a></li>
             <li><a href="{{DIRPAGE.'admin-encomendas'}}"><span class="text-link">ENCOMENDAS</span></a></li>
             <li><a href="{{DIRPAGE.'admin-stock'}}"><i class="fa-solid fa-boxes-stacked"></i><span class="text-link">ESTOQUE</span></a></li>
+            <li><a href="{{DIRPAGE.'admin-produtos'}}"><i class="fa-solid fa-clipboard-list"></i> <span class="text-link">CADASTRAR PRODUTO</span></a></li>
+            <li><a href="{{DIRPAGE.'admin-categorias'}}"><i class="fa-solid fa-plus"></i> <span class="text-link">CATEGORIAS</span></a></li>
             <li><a href="{{DIRPAGE.'admin-sair'}}"><i class="fa-solid fa-right-from-bracket"></i> <span class="text-link">SAIR </span></a></li>
 
             
