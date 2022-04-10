@@ -27,7 +27,7 @@
         </div>
         <div class="header-nav">
             <ul>
-                <li><a href="{{DIRPAGE.'admin-users'}}"> <i class="fa-solid fa-user"></i>Usuário</a></li>
+                <li><a href="{{DIRPAGE.'admin-users'}}"> <i class="fa-solid fa-user"></i>Usuários</a></li>
             </ul>
         </div>
     </div>
