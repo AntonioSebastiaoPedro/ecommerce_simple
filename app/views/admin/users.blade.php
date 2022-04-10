@@ -10,7 +10,7 @@
                     <table class="table table-light mt-5">
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                <th>ID do Usuário</th>
                                 <th>Tipo de Usuário</th>
                                 <th>Nome</th>
                                 <th>Email</th>
@@ -25,8 +25,8 @@
                                 <td>{{$usuario->name_user}}</td>
                                 <td>{{$usuario->email}}</td>
                                 <td>
-                                    <a><button class="btn btn-sm btn-danger" name="deletar">Eliminar</button></a>
-                                    <a><button class="btn btn-sm btn-warning" name="editar">Editar</button></a>
+                                    <a href="{{DIRPAGE.'admin-delete-user/'.$usuario->id}}"><button class="btn btn-sm btn-warning" >Editar</button></a>
+                                    <a href="{{DIRPAGE.'admin-delete-user/'.$usuario->id}}"><button class="btn btn-sm btn-danger">Eliminar</button></a>
                                 </td>
                             </tr>
                             @endforeach

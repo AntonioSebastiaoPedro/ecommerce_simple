@@ -31,6 +31,7 @@ $routes->getRoute('admin-vendas', 'AdminController@vendas');
 $routes->getRoute('admin-detalhes-venda', 'AdminController@detalhesVenda');
 $routes->getRoute('admin-stock', 'AdminController@stock');
 $routes->getRoute('admin-users', 'AdminController@users');
+$routes->getRoute('admin-delete-user', 'AdminController@deleteUsuario');
 $routes->getRoute('admim-cadastrar-produto', 'AdminController@cadastrarProduto');
 $routes->getRoute('admin-eliminar-produto', 'AdminController@delete');
 $routes->getRoute('admin-cadastrar-categoria', 'AdminController@cadastrarCategoria');

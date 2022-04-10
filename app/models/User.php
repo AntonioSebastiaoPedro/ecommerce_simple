@@ -70,10 +70,9 @@ class User extends Conexao{
 	
 
 
-	public function deleteUser($id){
-		$query = "DELETE FROM  users WHERE id = ?";
-		$stmt = $this->setConn()->prepare($query);
-		$stmt->bindValue(1, $id);
+	public static function deleteUser($id_user){
+		$query = "DELETE FROM  users WHERE id = {$id_user}";
+		$stmt = self::setConn()->prepare($query);
 		$stmt->execute();
 	}
 

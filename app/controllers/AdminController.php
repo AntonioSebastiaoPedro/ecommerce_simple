@@ -204,6 +204,13 @@ class AdminController extends Produto{
 		return $this->blade->render('admin/users', compact('users'));
 	}
 
+	public function deleteUsuario(){
+		$id_user = Rota::parseUrl()[1];
+		User::deleteUser($id_user);
+		flash('add_yes', '<b>Usuário eliminado com sucesso!</b>', 'alert alert-success');
+		return redir('admin-users', false);
+	}
+
 	public function encomendas(){
 		if(is_null($orders = Order::getOrders())){
 			return $this->blade->render('admin/encomendas');
