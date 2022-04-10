@@ -8,7 +8,7 @@
 
                 <!--ferramenta Vendas-->
                 <div class="col-md-3 mt-5">
-                    <div class="card bg-black text-white">
+                    <div class="card bg-primary text-white">
                         <div class="card-body">
                             <h4 class="font-weigth-light">Vendas</h4>
                             <hr>
@@ -20,9 +20,23 @@
                 </div>
                 <!--ferramenta Vendas-->
 
+                <!--ferramenta Vendas-->
+                <div class="col-md-3 mt-5">
+                    <div class="card bg-primary text-white">
+                        <div class="card-body">
+                            <h4 class="font-weigth-light">Encomendas</h4>
+                            <hr>
+                            <h5>
+                                 <b>{{$encomendas ?? 0}}</b>
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+                <!--ferramenta Vendas-->
+
                 <!--ferramenta categoria-->
                 <div class="col-md-3 mt-5">
-                    <div class="card bg-danger text-white">
+                    <div class="card bg-primary text-white">
                         <div class="card-body">
                             <h4 class="font-weigth-light">Categorias</h4>
                             <hr>
@@ -37,7 +51,7 @@
                                
                 <!--ferramenta pedidos-->
                 <div class="col-md-3 mt-5">
-                    <div class="card bg-secondary text-white">
+                    <div class="card bg-primary text-white">
                         <div class="card-body">
                             <h4 class="font-weigth-light"> <i class="fa-solid fa-clipboard-list"></i> Produtos</h4>
                             <hr>
@@ -52,9 +66,9 @@
 
                 <!--ferramenta produtos -->
                 <div class="col-md-3 mt-5">
-                    <div class="card bg-info text-white">
+                    <div class="card bg-primary text-white">
                         <div class="card-body">
-                            <h4 class="font-weigth-light">Estoque</h4>
+                            <h4 class="font-weigth-light">Stock</h4>
                             <hr>
                             <h5>
                                 <b>{{$stock ?? 0}}</b>
@@ -66,9 +80,9 @@
 
                  <!--ferramenta entregas -->
                 <div class="col-md-3 mt-5">
-                    <div class="card bg-info text-white">
+                    <div class="card bg-primary text-white">
                         <div class="card-body">
-                            <h4 class="font-weigth-light">Users</h4>
+                            <h4 class="font-weigth-light">Usuários</h4>
                             <hr>
                             <h5>
                                 <b>{{$users ?? 0}}</b>
