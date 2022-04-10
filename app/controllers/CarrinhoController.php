@@ -32,15 +32,16 @@ class CarrinhoController extends Cart{
 	}
 
 	public function addProduto(){
-		$id = isset(Rota::parseUrl()[1]) ? Rota::parseUrl()[1] : null;
-		if($id == null) {
+		$quant = (isset($_POST['quant'])) ? $_POST['quant'] : 1;
+		$idProduto = isset(Rota::parseUrl()[1]) ? Rota::parseUrl()[1] : null;
+		if($idProduto == null) {
 			return $this->index();
 		}
 		
 		$item = new Produto;
-		$produto = $item->getProduto($id);
-		//dd(number_format($this->cart->getAttributeTotal('price_unit'), 2, ',', '.'));
-		$this->cart->add($produto[0]->id, 1, [
+		$produto = $item->getProduto($idProduto);
+		
+		$this->cart->add($produto[0]->id, $quant, [
 			'name_product'  => $produto[0]->name_product,
 			'price_unit'  => $produto[0]->price_unit,
 			'id_category' => $produto[0]->id_category,
@@ -50,6 +51,29 @@ class CarrinhoController extends Cart{
 
 		flash('add_yes', '<b>Produto adicionado ao carrinho com sucesso!</b>', 'alert alert-success');
 		return redir('loja', false);
+		
+	}
+
+
+	public function updateProduto(){
+		$quant = $_POST['quant'];
+		$idProduto = $_POST['id'];
+		
+		$item = new Produto;
+		$produto = $item->getProduto($idProduto);
+
+		$this->cart->remove($idProduto);
+		
+		$this->cart->add($produto[0]->id, $quant, [
+			'name_product'  => $produto[0]->name_product,
+			'price_unit'  => $produto[0]->price_unit,
+			'id_category' => $produto[0]->id_category,
+			'img'   => $produto[0]->img,
+			'subtotal'   => $quant * $produto[0]->price_unit
+		]);
+
+		flash('add_yes', '<b>Quantidade alterada!</b>', 'alert alert-success');
+		return redir('carrinho', false);
 		
 	}
 

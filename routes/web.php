@@ -10,6 +10,7 @@ $routes->getRoute('sobre-nos', 'UserController@about');
 
 $routes->getRoute('carrinho', 'CarrinhoController@index');
 $routes->getRoute('add-carrinho', 'CarrinhoController@addProduto');
+$routes->getRoute('update-carrinho', 'CarrinhoController@updateProduto');
 $routes->getRoute('remove-carrinho', 'CarrinhoController@removeProduto');
 $routes->getRoute('finalizar-compra', 'CarrinhoController@finalizar');
 $routes->getRoute('checkout', 'CarrinhoController@checkout');

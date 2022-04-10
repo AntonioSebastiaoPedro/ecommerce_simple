@@ -31,13 +31,14 @@
                     @foreach ($items as $produto)
                     
                     <tr>
-                        <form action="" method="post">
-                        <td><a href="{{DIRPAGE.'remove-carrinho/'.$produto['id']}}"><i class="far fa-times-circle"></i></a></td>
-                        <td><img src="{{ DIRIMG.'img/products/'.App\Models\Category::getNameCategory($produto['attributes']['id_category'])[0]->name_category.'/'.$produto['attributes']['name_product'].'/'.$produto['attributes']['img']}}" alt=""></td>
-                        <td>{{$produto['attributes']['name_product']}}</td>
-                        <td>{{number_format($produto['attributes']['price_unit'], 2, ',', '.')}} Akz</td>
-                        <td><input type="number" value="{{$produto['quantity']}}" name="quantity"></td>
-                        <td><strong>{{number_format($produto['attributes']['price_unit'] * $produto['quantity'], 2, ',', '.')}} Akz</strong></td>
+                        <form action="{{DIRPAGE.'update-carrinho'}}" method="post">
+                            <input type="hidden" name="id" value="{{$produto['id']}}">
+                            <td><a href="{{DIRPAGE.'remove-carrinho/'.$produto['id']}}"><i class="far fa-times-circle"></i></a></td>
+                            <td><img src="{{ DIRIMG.'img/products/'.App\Models\Category::getNameCategory($produto['attributes']['id_category'])[0]->name_category.'/'.$produto['attributes']['name_product'].'/'.$produto['attributes']['img']}}" alt=""></td>
+                            <td>{{$produto['attributes']['name_product']}}</td>
+                            <td>{{number_format($produto['attributes']['price_unit'], 2, ',', '.')}} Akz</td>
+                            <td><input type="number" value="{{$produto['quantity']}}" name="quant"></td>
+                            <td><strong>{{number_format($produto['attributes']['price_unit'] * $produto['quantity'], 2, ',', '.')}} Akz</strong></td>
                     </form>
                     </tr>
                     @endforeach
