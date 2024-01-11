@@ -7,12 +7,12 @@
             <form action="{{ DIRPAGE . 'admin-editar-categoria/' . $dados['id'] }}" method="post"
                 class="col-sm-6 offset-md-3 border">
                 <h5 class="display-5 mt-5 text-center font-weight-bold">Editar de Categoria</h5>
-            @else
-                <form action="{{ DIRPAGE . 'admin-cadastrar-categoria' }}" method="post" class="col-sm-6 offset-md-3 border">
-                    <h5 class="display-5 mt-5 text-center font-weight-bold">Cadastro de Categoria</h5>
+        @else
+            <form action="{{ DIRPAGE . 'admin-cadastrar-categoria' }}" method="post" class="col-sm-6 offset-md-3 border">
+                <h5 class="display-5 mt-5 text-center font-weight-bold">Cadastro de Categoria</h5>
         @endif
         <div class="for-group mt-5">
-            <input class="form-control" type="text" value="{{ $dados['name_category'] ?? '' }}" name="nome"
+            <input class="form-control" type="text" value="{{ $dados['name_category'] ?? '' }}" name="name"
                 placeholder="Nome da categoria">
         </div>
 
