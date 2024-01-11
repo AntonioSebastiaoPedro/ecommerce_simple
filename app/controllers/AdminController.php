@@ -156,8 +156,8 @@ class AdminController extends Produto{
 		$id = isset(Rota::parseUrl()[1]) ? Rota::parseUrl()[1] : null;
 		$categoria = new Category;
 		if (count($_POST) > 0) {
-			if (!empty($_POST['nome'])) {
-				$nome = filter_input(INPUT_POST, 'nome', FILTER_DEFAULT);
+			if (!empty($_POST['name'])) {
+				$nome = filter_input(INPUT_POST, 'name', FILTER_DEFAULT);
 				$categoria::renomear($id, DIRREQ.'public/img/img/products/'.$categoria::getNameCategory($id)[0]->name_category, DIRREQ.'public/img/img/products/'.$nome);
 				$categoria->updateCategoria($nome, $id);
 				flash('edit_yes', '<b>Categoria editada com sucesso!</b>', 'alert alert-success');
